@@ -67,7 +67,7 @@ export const portfolioData = {
       ],
       technologies: ["C++", "Graphics API", "Physics Engine"],
       githubUrl: "https://github.com/sohan1611/reality-drift",
-      liveUrl: null,
+      liveUrl: "https://frontend-murex-six-zqpja4l0dm.vercel.app/",
       status: "Active Development"
     }
   ],
