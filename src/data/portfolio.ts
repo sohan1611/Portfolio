@@ -2,7 +2,7 @@ export const portfolioData = {
   personal: {
     name: "Sohan Mandal",
     headline: "Computer Science Student Building AI-Powered Solutions",
-    subheadline: "B.Tech CSE student at KIIT University interested in Artificial Intelligence, Data Science, Cybersecurity, and Software Development.",
+    subheadline: "B.Tech CSE student at KIIT University interested in Artificial Intelligence, Data Architecture, Cybersecurity, and Software Development.",
     email: "sohanmandal1611@gmail.com",
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
@@ -18,7 +18,7 @@ export const portfolioData = {
     { title: "Availability", value: "Open to Internship Opportunities" }
   ],
   about: {
-    content: "I am a B.Tech Computer Science and Engineering student at KIIT University. My academic journey is driven by a deep interest in Artificial Intelligence, Data Science, Cybersecurity, and Full-Stack Development. I am continuously expanding my technical skill set and applying theoretical knowledge to build practical, real-world solutions. My goal is to leverage software engineering to solve complex problems and contribute to impactful projects."
+    content: "I am a B.Tech Computer Science and Engineering student at KIIT University. My academic journey is driven by a deep interest in Artificial Intelligence, Data Architecture, Cybersecurity, and Full-Stack Development. I am continuously expanding my technical skill set and applying theoretical knowledge to build practical, real-world solutions. My goal is to leverage software engineering to solve complex problems and contribute to impactful projects."
   },
   education: [
     {
@@ -31,14 +31,15 @@ export const portfolioData = {
   skills: {
     languages: ["C", "Java", "Python"],
     tools: ["GitHub", "Vercel", "Google Cloud Run", "Antigravity"],
-    interests: ["Artificial Intelligence", "Data Science", "Cybersecurity", "Full Stack Development"],
-    currentlyLearning: ["Data Science", "Artificial Intelligence", "Cybersecurity", "Full Stack Development"]
+    interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "Full Stack Development (using AI Tools)"],
+    currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "Full Stack Development (using AI Tools)"]
   },
   futureGoals: [
-    "Building AI applications",
-    "Expanding Data Science knowledge",
+    "Building practical AI applications",
+    "Learning Data Architecture concepts and systems",
     "Strengthening Cybersecurity fundamentals",
-    "Developing full-stack products"
+    "Developing Full Stack Applications using AI-assisted development workflows",
+    "Improving Data Structures & Algorithms problem-solving skills"
   ],
   projects: [
     {
@@ -75,7 +76,7 @@ export const portfolioData = {
       title: "Build with AI Certification",
       issuer: "GeeksforGeeks",
       status: "Completed",
-      certificateFile: "/certificates/gfg-build-with-ai-certificate.pdf", // Can be .pdf, .png, .jpg
+      certificateFile: "/certificates/gfg-build-with-ai-certificate.pdf",
       showViewButton: true,
       showDownloadButton: true,
     },
