@@ -73,21 +73,27 @@ export const portfolioData = {
   achievements: [
     {
       title: "Build with AI Certification",
-      organization: "GeeksforGeeks",
-      date: "2024",
-      status: "Completed"
+      issuer: "GeeksforGeeks",
+      status: "Completed",
+      certificateFile: "/certificates/gfg-build-with-ai-certificate.pdf", // Can be .pdf, .png, .jpg
+      showViewButton: true,
+      showDownloadButton: true,
     },
     {
-      title: "GeeksforGeeks Learning Programs",
-      organization: "GeeksforGeeks",
-      date: "Present",
-      status: "Ongoing"
+      title: "GeeksforGeeks Learning Program",
+      issuer: "GeeksforGeeks",
+      status: "Ongoing",
+      certificateFile: null,
+      showViewButton: false,
+      showDownloadButton: false,
     },
     {
-      title: "Coursera Courses",
-      organization: "Coursera",
-      date: "Present",
-      status: "Ongoing"
+      title: "Coursera Learning Program",
+      issuer: "Coursera",
+      status: "Ongoing",
+      certificateFile: null,
+      showViewButton: false,
+      showDownloadButton: false,
     }
   ]
 };
