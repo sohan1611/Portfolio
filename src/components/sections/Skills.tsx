@@ -1,0 +1,47 @@
+import { portfolioData } from "@/data/portfolio";
+import { Section } from "../ui/Section";
+import { Code2, PenTool, Brain, Sparkles } from "lucide-react";
+import React from "react";
+
+function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
+  return (
+    <div className="p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 rounded-md bg-primary/10 text-primary">
+          <Icon className="h-5 w-5" />
+        </div>
+        <h3 className="font-semibold text-lg text-foreground">{title}</h3>
+      </div>
+      <ul className="flex flex-wrap gap-2">
+        {items.map((item) => (
+          <li
+            key={item}
+            className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm font-medium border border-border/50"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function Skills() {
+  return (
+    <Section id="skills">
+      <div className="space-y-12">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Skills & Interests</h2>
+          <div className="h-1 w-12 bg-primary rounded"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <SkillCard title="Programming Languages" items={portfolioData.skills.languages} icon={Code2} />
+          <SkillCard title="Tools & Platforms" items={portfolioData.skills.tools} icon={PenTool} />
+          <SkillCard title="Areas of Interest" items={portfolioData.skills.interests} icon={Brain} />
+          <SkillCard title="Currently Learning" items={portfolioData.skills.currentlyLearning} icon={Sparkles} />
+        </div>
+      </div>
+    </Section>
+  );
+}
