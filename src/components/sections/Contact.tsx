@@ -76,7 +76,9 @@ export function Contact() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
             <a
-              href={`mailto:${portfolioData.personal.email}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${portfolioData.personal.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
               <Mail className="mr-2 h-4 w-4" /> Send Email
