@@ -69,7 +69,7 @@ export const portfolioData = {
         "Behavioral trend prediction",
         "Interactive analytics dashboard"
       ],
-      technologies: ["C++", "Graphics API", "Physics Engine"],
+      technologies: ["Next.js", "Gemini AI", "PostgreSQL"],
       githubUrl: "https://github.com/sohan1611/reality-drift",
       liveUrl: "https://frontend-murex-six-zqpja4l0dm.vercel.app/",
       status: "Active Development"
