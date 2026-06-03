@@ -35,7 +35,7 @@ export function Projects() {
                       ))}
                     </div>
                   </div>
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary whitespace-nowrap">
+                  <span className="inline-flex items-center rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400 whitespace-nowrap">
                     {project.status}
                   </span>
                 </div>
