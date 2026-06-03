@@ -35,7 +35,11 @@ export function Projects() {
                       ))}
                     </div>
                   </div>
-                  <span className="inline-flex items-center rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400 whitespace-nowrap">
+                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap ${
+                    project.status === "In Progress" 
+                      ? "bg-amber-500/10 text-amber-600 dark:text-amber-400" 
+                      : "bg-primary/10 text-primary"
+                  }`}>
                     {project.status}
                   </span>
                 </div>
