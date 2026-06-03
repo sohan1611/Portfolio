@@ -40,8 +40,7 @@ export function Navbar() {
             {portfolioData.personal.name}
           </Link>
           {portfolioData.personal.openToInternship && (
-            <span className="hidden md:inline-flex items-center rounded-full bg-emerald-100/50 px-2 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 ring-1 ring-inset ring-emerald-600/20">
-              <span className="mr-1.5 flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            <span className="hidden md:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
               Open to Internship Opportunities
             </span>
           )}
