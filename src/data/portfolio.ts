@@ -29,7 +29,7 @@ export const portfolioData = {
     }
   ],
   skills: {
-    languages: ["C", "Java", "Python"],
+    languages: ["C", "Java", "Python", "SQL"],
     tools: ["GitHub", "Vercel", "Google Cloud Run", "Antigravity"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "Full Stack Development (using AI Tools)"],
     currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "Full Stack Development (using AI Tools)"]
