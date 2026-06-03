@@ -44,12 +44,14 @@ export const portfolioData = {
   projects: [
     {
       title: "Apex Intel",
-      problemStatement: "Organizations need robust systems to process large intelligence datasets efficiently.",
-      solution: "Developed an AI-driven platform for processing and analyzing intelligence data streams.",
+      problemStatement: "Startup due diligence requires extensive research across markets, competitors, risks, and business viability, making investment analysis time-consuming and fragmented.",
+      solution: "Built an autonomous multi-agent platform that analyzes startups and generates structured investment memos for investors and analysts.",
       keyFeatures: [
-        "Data stream processing",
-        "AI-driven analytics",
-        "Secure architecture"
+        "Multi-agent startup evaluation",
+        "Market and competitor analysis",
+        "Risk assessment workflows",
+        "Investment scoring engine",
+        "Structured investment memo generation"
       ],
       technologies: ["Next.js", "Python", "Machine Learning", "Tailwind CSS"],
       githubUrl: "https://github.com/sohan1611/apex-intel",
@@ -58,12 +60,14 @@ export const portfolioData = {
     },
     {
       title: "Reality Drift",
-      problemStatement: "Creating immersive virtual environments requires significant rendering and physics optimization.",
-      solution: "Building an optimized virtual environment engine tailored for high performance.",
+      problemStatement: "People often struggle to understand long-term behavioral patterns and the future impact of their daily habits.",
+      solution: "Built an AI-powered life pattern simulator that analyzes habits and predicts future behavioral trends over a 30-day horizon.",
       keyFeatures: [
-        "Custom physics integration",
-        "Optimized rendering pipeline",
-        "Interactive virtual environments"
+        "Habit tracking and analysis",
+        "AI-powered future simulations",
+        "Personalized coaching insights",
+        "Behavioral trend prediction",
+        "Interactive analytics dashboard"
       ],
       technologies: ["C++", "Graphics API", "Physics Engine"],
       githubUrl: "https://github.com/sohan1611/reality-drift",
@@ -81,7 +85,7 @@ export const portfolioData = {
       showDownloadButton: true,
     },
     {
-      title: "GeeksforGeeks Learning Program",
+      title: "Data Structures & Algorithms (DSA)",
       issuer: "GeeksforGeeks",
       status: "Ongoing",
       certificateFile: null,
@@ -89,7 +93,15 @@ export const portfolioData = {
       showDownloadButton: false,
     },
     {
-      title: "Coursera Learning Program",
+      title: "Generative AI",
+      issuer: "GeeksforGeeks",
+      status: "Ongoing",
+      certificateFile: null,
+      showViewButton: false,
+      showDownloadButton: false,
+    },
+    {
+      title: "Data Architecture",
       issuer: "Coursera",
       status: "Ongoing",
       certificateFile: null,
