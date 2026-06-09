@@ -71,7 +71,7 @@ export const portfolioData = {
       ],
       technologies: ["Next.js", "Gemini AI", "PostgreSQL"],
       githubUrl: "https://github.com/sohan1611/reality-drift",
-      liveUrl: "https://frontend-murex-six-zqpja4l0dm.vercel.app/",
+      liveUrl: "https://frontend-rho-ten-59.vercel.app",
       status: "Active Development"
     }
   ],
