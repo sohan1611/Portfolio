@@ -1,6 +1,6 @@
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
-import { Code2, PenTool, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench } from "lucide-react";
+import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench } from "lucide-react";
 import React from "react";
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {

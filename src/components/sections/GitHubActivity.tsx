@@ -28,11 +28,11 @@ async function getGitHubData() {
     const repos = await reposRes.json();
 
     const preferredNames = ["apex-intel", "reality-drift", "portfolio"];
-    let filteredRepos = repos.filter((repo: any) => 
+    let filteredRepos = repos.filter((repo: GitHubRepo) => 
       preferredNames.includes(repo.name.toLowerCase())
     );
 
-    filteredRepos = filteredRepos.map((repo: any) => {
+    filteredRepos = filteredRepos.map((repo: GitHubRepo) => {
       let desc = repo.description;
       if (!desc || desc.trim() === "") {
         if (repo.name.toLowerCase() === "portfolio") desc = "Personal portfolio website showcasing projects, skills, certifications, and technical interests.";
