@@ -29,8 +29,13 @@ export const portfolioData = {
     }
   ],
   skills: {
-    languages: ["C", "Java", "Python", "SQL"],
-    tools: ["GitHub", "Vercel", "Google Cloud Run", "Antigravity"],
+    programmingLanguages: ["C", "Java", "Python"],
+    frameworks: ["Next.js", "FastAPI", "Express.js"],
+    databases: ["PostgreSQL", "Prisma ORM", "SQLAlchemy"],
+    ai: ["OpenAI API", "Gemini API", "Serper API", "Resend"],
+    auth: ["Google OAuth"],
+    cloud: ["Vercel", "Railway", "Google Cloud Run"],
+    tools: ["Git", "GitHub"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "Full Stack Development (using AI Tools)"],
     currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "Full Stack Development (using AI Tools)"]
   },
@@ -53,7 +58,7 @@ export const portfolioData = {
         "Investment scoring engine",
         "Structured investment memo generation"
       ],
-      technologies: ["Next.js", "Python", "Machine Learning", "Tailwind CSS"],
+      technologies: ["Multi-Agent AI", "Due Diligence", "Investment Analysis"],
       githubUrl: "https://github.com/sohan1611/apex-intel",
       liveUrl: null,
       status: "In Progress"
@@ -69,7 +74,7 @@ export const portfolioData = {
         "Behavioral trend prediction",
         "Interactive analytics dashboard"
       ],
-      technologies: ["Next.js", "Gemini AI", "PostgreSQL"],
+      technologies: ["AI Simulation", "Behavior Analytics", "Habit Tracking"],
       githubUrl: "https://github.com/sohan1611/reality-drift",
       liveUrl: "https://frontend-rho-ten-59.vercel.app",
       status: "Active Development"

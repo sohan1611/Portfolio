@@ -43,7 +43,7 @@ export function Contact() {
                 <div>
                   <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">Core Skills</h3>
                   <p className="text-sm text-foreground leading-relaxed">
-                    {portfolioData.skills.languages.join(", ")}
+                    {portfolioData.skills.programmingLanguages.join(", ")}
                   </p>
                 </div>
                 <div>
