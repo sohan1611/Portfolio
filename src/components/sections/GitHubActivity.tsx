@@ -15,8 +15,8 @@ async function getGitHubData() {
   try {
     const username = "sohan1611"; // Hardcoded or moved to config
     const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 3600 } }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=4`, { next: { revalidate: 3600 } })
+      fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 60 } }),
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, { next: { revalidate: 60 } })
     ]);
 
     if (!userRes.ok || !reposRes.ok) {
@@ -27,7 +27,22 @@ async function getGitHubData() {
     const user = await userRes.json();
     const repos = await reposRes.json();
 
-    return { user, repos };
+    const preferredNames = ["apex-intel", "reality-drift", "portfolio"];
+    let filteredRepos = repos.filter((repo: any) => 
+      preferredNames.includes(repo.name.toLowerCase())
+    );
+
+    filteredRepos = filteredRepos.map((repo: any) => {
+      let desc = repo.description;
+      if (!desc || desc.trim() === "") {
+        if (repo.name.toLowerCase() === "portfolio") desc = "Personal portfolio website showcasing projects, skills, certifications, and technical interests.";
+        if (repo.name.toLowerCase() === "reality-drift") desc = "AI-powered life pattern simulator for habit analysis and behavioral forecasting.";
+        if (repo.name.toLowerCase() === "apex-intel") desc = "Autonomous multi-agent due diligence platform for startup evaluation and investment analysis.";
+      }
+      return { ...repo, description: desc };
+    });
+
+    return { user, repos: filteredRepos };
   } catch (error) {
     console.error("Failed to fetch GitHub data:", error);
     return null;
@@ -106,7 +121,7 @@ export async function GitHubActivity() {
                       {repo.language}
                     </span>
                   )}
-                  <span>Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+                  <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
                 </div>
               </a>
             ))}

@@ -31,7 +31,7 @@ export function Skills() {
     <Section id="skills">
       <div className="space-y-12">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Skills & Interests</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Skills</h2>
           <div className="h-1 w-12 bg-primary rounded"></div>
         </div>
 
@@ -43,6 +43,14 @@ export function Skills() {
           <SkillCard title="Authentication & Integrations" items={portfolioData.skills.auth} icon={Lock} />
           <SkillCard title="Cloud & Deployment" items={portfolioData.skills.cloud} icon={Cloud} />
           <SkillCard title="Tools & Platforms" items={portfolioData.skills.tools} icon={Wrench} />
+        </div>
+
+        <div className="pt-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Interests & Learning</h2>
+          <div className="h-1 w-12 bg-primary rounded"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <SkillCard title="Areas of Interest" items={portfolioData.skills.interests} icon={Brain} />
           <SkillCard title="Currently Learning" items={portfolioData.skills.currentlyLearning} icon={Sparkles} />
         </div>
