@@ -35,7 +35,8 @@ export const portfolioData = {
     ai: ["OpenAI API", "Gemini API", "Serper API", "Resend"],
     auth: ["Google OAuth"],
     cloud: ["Vercel", "Railway", "Google Cloud Run"],
-    tools: ["Git", "GitHub"],
+    tools: ["Git", "GitHub", "Antigravity"],
+    aiDev: ["Antigravity", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "Full Stack Development (using AI Tools)"],
     currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "Full Stack Development (using AI Tools)"]
   },

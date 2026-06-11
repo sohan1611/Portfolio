@@ -1,6 +1,6 @@
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
-import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench } from "lucide-react";
+import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench, Bot } from "lucide-react";
 import React from "react";
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
@@ -42,7 +42,8 @@ export function Skills() {
           <SkillCard title="AI & APIs" items={portfolioData.skills.ai} icon={Cpu} />
           <SkillCard title="Authentication & Integrations" items={portfolioData.skills.auth} icon={Lock} />
           <SkillCard title="Cloud & Deployment" items={portfolioData.skills.cloud} icon={Cloud} />
-          <SkillCard title="Tools & Platforms" items={portfolioData.skills.tools} icon={Wrench} />
+          <SkillCard title="Engineering Tools" items={portfolioData.skills.tools} icon={Wrench} />
+          <SkillCard title="AI-Assisted Development" items={portfolioData.skills.aiDev} icon={Bot} />
         </div>
 
         <div className="pt-8">
