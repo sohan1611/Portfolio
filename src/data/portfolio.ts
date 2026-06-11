@@ -1,8 +1,8 @@
 export const portfolioData = {
   personal: {
     name: "Sohan Mandal",
-    headline: "Computer Science Student Building AI-Powered Solutions",
-    subheadline: "B.Tech CSE student at KIIT University interested in Artificial Intelligence, Data Architecture, Cybersecurity, and Software Development.",
+    headline: "Building AI Systems, Data-Driven Products & Modern Web Applications",
+    subheadline: "B.Tech CSE student at KIIT University focused on Artificial Intelligence, Data Architecture, Cybersecurity, and AI-assisted Full Stack Development. Building intelligent applications that combine AI, data, and software engineering to solve real-world problems.",
     email: "sohanmandal1611@gmail.com",
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
@@ -14,7 +14,7 @@ export const portfolioData = {
   highlights: [
     { title: "Education", value: "B.Tech CSE @ KIIT University" },
     { title: "Academic Standing", value: "CGPA: 8.64" },
-    { title: "Focus Areas", value: "AI & Software Development Projects" },
+    { title: "Focus Areas", value: "AI Systems & Data-Driven Applications" },
     { title: "Availability", value: "Open to Internship Opportunities" }
   ],
   about: {
