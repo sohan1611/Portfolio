@@ -6,7 +6,7 @@ export const portfolioData = {
     email: "sohanmandal1611@gmail.com",
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
-    linkedin: "https://www.linkedin.com/in/sohan-mandal-13b0a71b2",
+    linkedin: "https://www.linkedin.com/in/sohanm16",
     cgpa: "8.75",
     resumeUrl: "/resume/Sohan_Mandal_Resume.pdf",
     openToInternship: true,
@@ -29,7 +29,7 @@ export const portfolioData = {
     }
   ],
   skills: {
-    programmingLanguages: ["C", "Java", "Python"],
+    programmingLanguages: ["C", "Java", "Python", "SQL"],
     frameworks: ["Next.js", "FastAPI", "Express.js"],
     databases: ["PostgreSQL", "Prisma ORM", "SQLAlchemy"],
     ai: ["OpenAI API", "Gemini API", "Serper API", "Resend"],
