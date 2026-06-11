@@ -7,13 +7,13 @@ export const portfolioData = {
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
     linkedin: "https://www.linkedin.com/in/sohan-mandal-13b0a71b2",
-    cgpa: "8.64",
+    cgpa: "8.75",
     resumeUrl: "/resume/Sohan_Mandal_Resume.pdf",
     openToInternship: true,
   },
   highlights: [
     { title: "Education", value: "B.Tech CSE @ KIIT University" },
-    { title: "Academic Standing", value: "CGPA: 8.64" },
+    { title: "Academic Standing", value: "CGPA: 8.75" },
     { title: "Focus Areas", value: "AI Systems & Data-Driven Applications" },
     { title: "Availability", value: "Open to Internship Opportunities" }
   ],
@@ -25,7 +25,7 @@ export const portfolioData = {
       institution: "KIIT University",
       degree: "B.Tech CSE",
       duration: "2024–2028",
-      cgpa: "8.64"
+      cgpa: "8.75"
     }
   ],
   skills: {
