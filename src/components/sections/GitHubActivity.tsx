@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Section } from "../ui/Section";
 import { GitCommit, BookOpen, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
@@ -11,12 +12,18 @@ interface GitHubRepo {
   updated_at: string;
 }
 
+const FALLBACK_DESCRIPTIONS: Record<string, string> = {
+  "portfolio": "Personal portfolio website showcasing projects, skills, certifications, and technical interests.",
+  "reality-drift": "AI-powered life pattern simulator for habit analysis and behavioral forecasting.",
+  "apex-intel": "Autonomous multi-agent due diligence platform for startup evaluation and investment analysis.",
+};
+
 async function getGitHubData() {
   try {
-    const username = "sohan1611"; // Hardcoded or moved to config
+    const username = "sohan1611";
     const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 60 } }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, { next: { revalidate: 60 } })
+      fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 3600 } }),
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`, { next: { revalidate: 3600 } })
     ]);
 
     if (!userRes.ok || !reposRes.ok) {
@@ -28,19 +35,14 @@ async function getGitHubData() {
     const repos = await reposRes.json();
 
     const preferredNames = ["apex-intel", "reality-drift", "portfolio"];
-    let filteredRepos = repos.filter((repo: GitHubRepo) => 
-      preferredNames.includes(repo.name.toLowerCase())
-    );
-
-    filteredRepos = filteredRepos.map((repo: GitHubRepo) => {
-      let desc = repo.description;
-      if (!desc || desc.trim() === "") {
-        if (repo.name.toLowerCase() === "portfolio") desc = "Personal portfolio website showcasing projects, skills, certifications, and technical interests.";
-        if (repo.name.toLowerCase() === "reality-drift") desc = "AI-powered life pattern simulator for habit analysis and behavioral forecasting.";
-        if (repo.name.toLowerCase() === "apex-intel") desc = "Autonomous multi-agent due diligence platform for startup evaluation and investment analysis.";
-      }
-      return { ...repo, description: desc };
-    });
+    const filteredRepos = repos
+      .filter((repo: GitHubRepo) =>
+        preferredNames.includes(repo.name.toLowerCase())
+      )
+      .map((repo: GitHubRepo) => ({
+        ...repo,
+        description: repo.description?.trim() || FALLBACK_DESCRIPTIONS[repo.name.toLowerCase()] || repo.description,
+      }));
 
     return { user, repos: filteredRepos };
   } catch (error) {
@@ -49,28 +51,55 @@ async function getGitHubData() {
   }
 }
 
-export async function GitHubActivity() {
-  const data = await getGitHubData();
-  
-  if (!data) {
-    // Graceful degradation when API fails
-    return (
-      <Section id="github" className="border-t border-border">
-        <div className="flex items-center gap-3 mb-6">
-          <GitCommit className="h-8 w-8 text-primary" />
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Profile</h2>
-            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+function GitHubSkeleton() {
+  return (
+    <Section id="github" className="border-t border-border">
+      <div className="flex items-center gap-3 mb-6">
+        <GitCommit className="h-8 w-8 text-primary" />
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Activity</h2>
+          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="p-5 rounded-xl bg-card border border-border animate-pulse">
+            <div className="h-4 w-32 bg-muted rounded mb-3"></div>
+            <div className="h-3 w-full bg-muted rounded mb-2"></div>
+            <div className="h-3 w-2/3 bg-muted rounded mb-4"></div>
+            <div className="h-3 w-24 bg-muted rounded"></div>
           </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function GitHubFallback() {
+  return (
+    <Section id="github" className="border-t border-border">
+      <div className="flex items-center gap-3 mb-6">
+        <GitCommit className="h-8 w-8 text-primary" />
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Profile</h2>
+          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
         </div>
-        <div className="p-6 rounded-xl bg-card border border-border text-center">
-          <p className="text-muted-foreground mb-4">View my full open-source portfolio and recent activity directly on GitHub.</p>
-          <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-primary hover:underline">
-            Visit @sohan1611 <ExternalLink className="ml-1 h-3.5 w-3.5" />
-          </a>
-        </div>
-      </Section>
-    );
+      </div>
+      <div className="p-6 rounded-xl bg-card border border-border text-center">
+        <p className="text-muted-foreground mb-4">View my full open-source portfolio and recent activity directly on GitHub.</p>
+        <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-primary hover:underline">
+          Visit @sohan1611 <ExternalLink className="ml-1 h-3.5 w-3.5" />
+        </a>
+      </div>
+    </Section>
+  );
+}
+
+async function GitHubContent() {
+  const data = await getGitHubData();
+
+  if (!data) {
+    return <GitHubFallback />;
   }
 
   return (
@@ -132,5 +161,13 @@ export async function GitHubActivity() {
         </div>
       </div>
     </Section>
+  );
+}
+
+export function GitHubActivity() {
+  return (
+    <Suspense fallback={<GitHubSkeleton />}>
+      <GitHubContent />
+    </Suspense>
   );
 }
