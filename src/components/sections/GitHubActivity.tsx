@@ -64,18 +64,11 @@ function GitHubSkeleton() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="terminal-block animate-pulse">
-            <div className="flex items-center gap-1.5 px-4 py-2 border-b border-border/50 bg-background/50">
-              <div className="w-3 h-3 rounded-full bg-red-500/20"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/20"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/20"></div>
-            </div>
-            <div className="p-5">
-              <div className="h-4 w-32 bg-muted rounded mb-3"></div>
-              <div className="h-3 w-full bg-muted rounded mb-2"></div>
-              <div className="h-3 w-2/3 bg-muted rounded mb-4"></div>
-              <div className="h-3 w-24 bg-muted rounded"></div>
-            </div>
+          <div key={i} className="p-6 rounded-xl border border-border/50 dark:border-slate-800 bg-card animate-pulse">
+            <div className="h-5 w-40 bg-muted rounded mb-3"></div>
+            <div className="h-4 w-full bg-muted rounded mb-2"></div>
+            <div className="h-4 w-2/3 bg-muted rounded mb-5"></div>
+            <div className="h-3 w-24 bg-muted rounded"></div>
           </div>
         ))}
       </div>
@@ -142,30 +135,23 @@ async function GitHubContent() {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block terminal-block hover-glow group"
+                className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] bg-card hover:border-primary/50 hover:shadow-sm transition-all group"
               >
-                <div className="flex items-center gap-1.5 px-4 py-2 border-b border-border/50 bg-background/50">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                <div className="flex items-center gap-2 mb-3">
+                  <BookOpen className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <h4 className="text-lg font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
                 </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <h4 className="font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
-                  </div>
-                  <p className="text-sm font-display text-muted-foreground line-clamp-2 mb-4 h-10">
-                    {repo.description || "No description provided."}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs font-display text-muted-foreground">
-                    {repo.language && (
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-primary/70"></span>
-                        {repo.language}
-                      </span>
-                    )}
-                    <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
-                  </div>
+                <p className="text-sm text-muted-foreground line-clamp-2 mb-5 h-10">
+                  {repo.description || "No description provided."}
+                </p>
+                <div className="flex items-center gap-4 text-xs font-display text-muted-foreground opacity-80">
+                  {repo.language && (
+                    <span className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-primary/70"></span>
+                      {repo.language}
+                    </span>
+                  )}
+                  <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
                 </div>
               </a>
             ))}

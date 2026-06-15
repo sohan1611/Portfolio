@@ -5,18 +5,18 @@ import React from "react";
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
   return (
-    <div className="p-6 rounded-xl glass-surface hover-glow">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-md bg-primary/10 text-primary">
+    <div className="p-8 rounded-xl glass-surface hover-glow">
+      <div className="flex items-center gap-4 mb-6">
+        <div className="p-2.5 rounded-md bg-primary/10 text-primary">
           <Icon className="h-5 w-5" />
         </div>
         <h3 className="font-display font-semibold text-lg text-foreground">{title}</h3>
       </div>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-3">
         {items.map((item) => (
           <li
             key={item}
-            className="px-2.5 py-1 rounded bg-primary/5 border border-primary/20 text-xs font-display font-semibold tracking-wider text-primary"
+            className="px-3 py-1.5 rounded-lg bg-muted/40 border border-border/40 text-xs font-display font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
           >
             {item}
           </li>
@@ -35,7 +35,7 @@ export function Skills() {
           <div className="h-1 w-12 bg-primary rounded mt-2"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <SkillCard title="Programming Languages" items={portfolioData.skills.programmingLanguages} icon={Code2} />
           <SkillCard title="Frameworks & Libraries" items={portfolioData.skills.frameworks} icon={Layers} />
           <SkillCard title="Databases & ORM" items={portfolioData.skills.databases} icon={Database} />
@@ -46,12 +46,12 @@ export function Skills() {
           <SkillCard title="AI-Assisted Development" items={portfolioData.skills.aiDev} icon={Bot} />
         </div>
 
-        <div className="pt-8">
+        <div className="pt-12">
           <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Interests & Learning</h2>
           <div className="h-1 w-12 bg-primary rounded"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <SkillCard title="Areas of Interest" items={portfolioData.skills.interests} icon={Brain} />
           <SkillCard title="Currently Learning" items={portfolioData.skills.currentlyLearning} icon={Sparkles} />
         </div>

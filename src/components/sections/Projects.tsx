@@ -38,7 +38,7 @@ export function Projects() {
                   <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-display font-semibold whitespace-nowrap border ${
                     project.status === "In Progress" 
                       ? "bg-amber-500/10 text-amber-500 border-amber-500/20" 
-                      : "bg-tertiary/10 text-tertiary border-tertiary/20"
+                      : "bg-[#60A5FA]/10 text-[#60A5FA] border-[#60A5FA]/20"
                   }`}>
                     {project.status}
                   </span>

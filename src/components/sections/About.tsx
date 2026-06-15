@@ -14,9 +14,11 @@ export function About() {
           </div>
         </div>
 
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          {portfolioData.about.content}
-        </p>
+        <div className="max-w-3xl text-lg text-muted-foreground leading-relaxed space-y-6">
+          {portfolioData.about.content.split('\n\n').map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
       </div>
     </Section>
   );

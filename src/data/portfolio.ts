@@ -2,7 +2,7 @@ export const portfolioData = {
   personal: {
     name: "Sohan Mandal",
     headline: "Building AI Systems, Data-Driven Products & Modern Web Applications",
-    subheadline: "B.Tech CSE student at KIIT University focused on Artificial Intelligence, Data Architecture, Cybersecurity, and AI-assisted Full Stack Development. Building intelligent applications that combine AI, data, and software engineering to solve real-world problems.",
+    subheadline: "B.Tech CSE student at KIIT University with a strong interest in Artificial Intelligence, Data Architecture, and Cybersecurity. I enjoy building intelligent systems that combine AI, data, and software engineering to solve practical, real-world problems.",
     email: "sohanmandal1611@gmail.com",
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
@@ -18,7 +18,7 @@ export const portfolioData = {
     { title: "Availability", value: "Open to Internship Opportunities" }
   ],
   about: {
-    content: "I am a B.Tech Computer Science and Engineering student at KIIT University. My academic journey is driven by a deep interest in Artificial Intelligence, Data Architecture, Cybersecurity, and Full-Stack Development. I am continuously expanding my technical skill set and applying theoretical knowledge to build practical, real-world solutions. My goal is to leverage software engineering to solve complex problems and contribute to impactful projects."
+    content: "I am a B.Tech Computer Science and Engineering student at KIIT University with a growing focus on Artificial Intelligence, Data Architecture, and Cybersecurity.\n\nMy projects explore how intelligent systems can analyze information, automate decisions, and generate meaningful insights. I enjoy combining AI models, modern software engineering, and scalable data systems to build solutions that are practical, reliable, and impactful.\n\nCurrently, I am expanding my knowledge in Data Structures & Algorithms, Data Architecture, and AI-assisted development while actively building real-world projects."
   },
   education: [
     {
@@ -37,8 +37,8 @@ export const portfolioData = {
     cloud: ["Vercel", "Railway", "Google Cloud Run"],
     tools: ["Git", "GitHub", "Antigravity"],
     aiDev: ["Antigravity", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
-    interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "Full Stack Development (using AI Tools)"],
-    currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "Full Stack Development (using AI Tools)"]
+    interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "AI-Assisted Full Stack Development"],
+    currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "AI-Assisted Full Stack Development"]
   },
   futureGoals: [
     "Building practical AI applications",

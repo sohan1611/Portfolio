@@ -17,8 +17,8 @@ export function Footer() {
             <FaLinkedin className="h-5 w-5" />
           </a>
         </div>
-        <p className="text-sm text-muted-foreground text-center">
-          © {new Date().getFullYear()} {portfolioData.personal.name}. Software Engineering Portfolio.
+        <p className="text-sm font-display text-muted-foreground/80 tracking-wide text-center">
+          © {new Date().getFullYear()} {portfolioData.personal.name}. All rights reserved.
         </p>
       </div>
     </footer>
