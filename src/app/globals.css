@@ -26,9 +26,9 @@
   --foreground: #dae2fd;
   --muted: #131b2e;
   --muted-foreground: #c2c6d6;
-  --card: rgba(15, 23, 42, 0.4);
+  --card: rgba(255, 255, 255, 0.03);
   --card-foreground: #dae2fd;
-  --border: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.12);
   --primary: #adc6ff;
   --primary-foreground: #002e6a;
   --accent: #4cd7f6;
