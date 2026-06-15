@@ -65,6 +65,22 @@ export const portfolioData = {
       status: "In Progress"
     },
     {
+      title: "SentinelIQ",
+      problemStatement: "Analyzing public company filings and transcripts to detect inconsistencies and governance risks is a dense, fragmented, and time-consuming process.",
+      solution: "Built an institutional-grade financial forensics engine that analyzes public data to detect potential fraud and governance risks.",
+      keyFeatures: [
+        "Institutional financial forensics",
+        "Fraud and inconsistency detection",
+        "Public filings and transcript analysis",
+        "Analyst-style report generation",
+        "Editorial and monospaced data visualization"
+      ],
+      technologies: ["Financial Forensics", "Risk Detection", "AI Analysis"],
+      githubUrl: "https://github.com/sohan1611/SentinelIQ",
+      liveUrl: null,
+      status: "In Progress"
+    },
+    {
       title: "Reality Drift",
       problemStatement: "People often struggle to understand long-term behavioral patterns and the future impact of their daily habits.",
       solution: "Built an AI-powered life pattern simulator that analyzes habits and predicts future behavioral trends over a 30-day horizon.",

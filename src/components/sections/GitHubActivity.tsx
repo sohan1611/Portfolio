@@ -16,6 +16,7 @@ const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   "portfolio": "Personal portfolio website showcasing projects, skills, certifications, and technical interests.",
   "reality-drift": "AI-powered life pattern simulator for habit analysis and behavioral forecasting.",
   "apex-intel": "Autonomous multi-agent due diligence platform for startup evaluation and investment analysis.",
+  "sentineliq": "Institutional-grade financial forensics engine to detect potential fraud, inconsistencies, and governance risks.",
 };
 
 async function getGitHubData() {
@@ -34,14 +35,14 @@ async function getGitHubData() {
     const user = await userRes.json();
     const repos = await reposRes.json();
 
-    const preferredNames = ["apex-intel", "reality-drift", "portfolio"];
+    const preferredNames = ["apex-intel", "sentineliq", "reality-drift", "portfolio"];
     const filteredRepos = repos
       .filter((repo: GitHubRepo) =>
         preferredNames.includes(repo.name.toLowerCase())
       )
       .map((repo: GitHubRepo) => ({
         ...repo,
-        description: repo.description?.trim() || FALLBACK_DESCRIPTIONS[repo.name.toLowerCase()] || repo.description,
+        description: repo.description?.trim() || FALLBACK_DESCRIPTIONS[repo.name.toLowerCase()] || "No description provided.",
       }));
 
     return { user, repos: filteredRepos };
