@@ -8,8 +8,17 @@ export function Hero() {
   return (
     <Section id="home" className="min-h-[60vh] flex flex-col justify-center pt-32 pb-16">
       <div className="max-w-3xl space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-          {portfolioData.personal.headline}
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-sm font-display font-medium text-primary mb-8 hover-glow cursor-default">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+          </span>
+          <span>System Online • Open to Opportunities</span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground mb-6">
+          <span className="block mb-2">Hello, world.</span>
+          <span className="block mb-2">I&apos;m a Software Engineer</span>
+          <span className="block text-primary">building high-performance systems.</span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
           {portfolioData.personal.subheadline}

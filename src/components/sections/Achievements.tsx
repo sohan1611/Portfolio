@@ -88,27 +88,27 @@ export function Achievements() {
     <Section id="achievements" className="border-t border-border bg-background">
       <div className="max-w-4xl space-y-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Certifications</h2>
-          <div className="h-1 w-12 bg-primary rounded"></div>
+          <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Certifications</h2>
+          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
         </div>
 
         <div className="space-y-6">
           {portfolioData.achievements.map((item, index) => (
             <div 
               key={index} 
-              className="p-6 rounded-xl bg-card border border-border shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="p-6 rounded-xl glass-surface hover-glow flex flex-col md:flex-row md:items-center justify-between gap-6"
             >
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-muted rounded-full shrink-0">
                   <Award className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-muted-foreground mb-3">{item.issuer}</p>
+                  <h3 className="text-xl font-display font-semibold text-foreground mb-1">{item.title}</h3>
+                  <p className="text-sm font-display text-muted-foreground mb-3">{item.issuer}</p>
                   
                   {item.status === "Ongoing" && (
                     <div className="inline-flex items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-600 dark:text-amber-400">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-display font-medium text-amber-500 border border-amber-500/20">
                         <Clock className="h-3 w-3" /> Coming Soon
                       </span>
                       <p className="text-xs text-muted-foreground mt-1">
@@ -123,7 +123,7 @@ export function Achievements() {
                 <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                   <button
                     onClick={() => setSelectedCert(item as Certificate)}
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-display font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label={`View ${item.title} certificate`}
                   >
                     <Eye className="mr-2 h-4 w-4" /> View Certificate
@@ -133,7 +133,7 @@ export function Achievements() {
                     <a
                       href={item.certificateFile}
                       download
-                      className="inline-flex h-10 items-center justify-center rounded-md border border-border bg-transparent px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="inline-flex h-10 items-center justify-center rounded-md border border-primary px-4 text-sm font-display font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       aria-label={`Download ${item.title} certificate`}
                     >
                       <Download className="mr-2 h-4 w-4" /> Download Certificate

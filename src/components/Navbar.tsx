@@ -28,15 +28,15 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full transition-all duration-200 ${
+      className={`fixed top-0 z-40 w-full transition-colors duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
+          ? "glass-surface bg-background/80"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <Link href="#home" className="text-sm font-semibold tracking-tight hover:text-primary transition-colors">
+          <Link href="#home" className="text-sm font-display font-bold tracking-tight text-foreground hover:text-accent transition-colors">
             {portfolioData.personal.name}
           </Link>
           {portfolioData.personal.openToInternship && (
@@ -51,9 +51,12 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-display font-medium text-muted-foreground hover:text-accent transition-colors relative group"
             >
-              {link.name}
+              <span className="relative">
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              </span>
             </Link>
           ))}
           <ThemeToggle />

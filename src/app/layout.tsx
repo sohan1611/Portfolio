@@ -1,13 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@/components/Analytics";
 import { portfolioData } from "@/data/portfolio";
 
-const inter = Inter({ 
+const geist = Geist({ 
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist",
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: 'swap',
 });
 
@@ -81,7 +87,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} font-sans min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary`}
+        className={`${geist.variable} ${jetbrainsMono.variable} font-sans min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary`}
       >
         <ThemeProvider
           attribute="class"

@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), "Inter", sans-serif;
+  --font-sans: var(--font-geist), "Geist", sans-serif;
+  --font-display: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -15,29 +16,22 @@
   --color-border: var(--border);
   
   --color-primary: var(--primary);
-  --color-primary-foreground: #ffffff;
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
-  --muted: #f8f9fa;
-  --muted-foreground: #4b5563;
-  --card: #ffffff;
-  --card-foreground: #111827;
-  --border: #e5e7eb;
-  --primary: #2563eb;
-}
-
-.dark {
-  --background: #0f172a;
-  --foreground: #e2e8f0;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --card: #1e293b;
-  --card-foreground: #e2e8f0;
-  --border: #334155;
-  --primary: #3b82f6;
+  --background: #020617;
+  --foreground: #dae2fd;
+  --muted: #131b2e;
+  --muted-foreground: #c2c6d6;
+  --card: rgba(15, 23, 42, 0.4);
+  --card-foreground: #dae2fd;
+  --border: rgba(255, 255, 255, 0.05);
+  --primary: #adc6ff;
+  --primary-foreground: #002e6a;
+  --accent: #4cd7f6;
 }
 
 @layer base {
@@ -47,14 +41,52 @@
   
   body {
     background-color: var(--background);
+    background-image: linear-gradient(to bottom, #0F172A, #020617);
+    background-attachment: fixed;
     color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-.command-palette-overlay {
-  backdrop-filter: blur(4px);
+.max-w-content {
+  max-width: 1200px;
 }
 
-.max-w-content {
-  max-width: 1100px;
+::selection {
+  background-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  color: var(--foreground);
+}
+
+/* Glassmorphism Surface */
+.glass-surface {
+  background-color: var(--card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* Premium Hover Glow */
+.hover-glow {
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.hover-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(173, 198, 255, 0.15);
+  border-color: var(--primary);
+}
+
+/* Terminal Block Style */
+.terminal-block {
+  background-color: #0F172A;
+  border: 1px solid var(--border);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Tighter tracking for headings */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
 }

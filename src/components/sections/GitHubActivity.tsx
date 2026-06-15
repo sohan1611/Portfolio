@@ -58,17 +58,24 @@ function GitHubSkeleton() {
       <div className="flex items-center gap-3 mb-6">
         <GitCommit className="h-8 w-8 text-primary" />
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Activity</h2>
+          <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
           <div className="h-1 w-12 bg-primary rounded mt-2"></div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="p-5 rounded-xl bg-card border border-border animate-pulse">
-            <div className="h-4 w-32 bg-muted rounded mb-3"></div>
-            <div className="h-3 w-full bg-muted rounded mb-2"></div>
-            <div className="h-3 w-2/3 bg-muted rounded mb-4"></div>
-            <div className="h-3 w-24 bg-muted rounded"></div>
+          <div key={i} className="terminal-block animate-pulse">
+            <div className="flex items-center gap-1.5 px-4 py-2 border-b border-border/50 bg-background/50">
+              <div className="w-3 h-3 rounded-full bg-red-500/20"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500/20"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500/20"></div>
+            </div>
+            <div className="p-5">
+              <div className="h-4 w-32 bg-muted rounded mb-3"></div>
+              <div className="h-3 w-full bg-muted rounded mb-2"></div>
+              <div className="h-3 w-2/3 bg-muted rounded mb-4"></div>
+              <div className="h-3 w-24 bg-muted rounded"></div>
+            </div>
           </div>
         ))}
       </div>
@@ -110,21 +117,21 @@ async function GitHubContent() {
           <div className="flex items-center gap-3">
             <GitCommit className="h-8 w-8 text-primary" />
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Activity</h2>
+              <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
               <div className="h-1 w-12 bg-primary rounded mt-2"></div>
             </div>
           </div>
           
           <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-lg border border-border">
-            <span className="text-sm font-medium text-foreground">{data.user.public_repos}</span>
-            <span className="text-sm text-muted-foreground">Public Repositories</span>
+            <span className="text-sm font-display font-medium text-foreground">{data.user.public_repos}</span>
+            <span className="text-sm font-display text-muted-foreground">Public Repositories</span>
           </div>
         </div>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-foreground">Recent Repositories</h3>
-            <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline hidden sm:flex items-center">
+            <h3 className="text-xl font-display font-semibold text-foreground">Recent Repositories</h3>
+            <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm font-display text-primary hover:text-accent transition-colors hidden sm:flex items-center">
               View Profile <ExternalLink className="ml-1 h-3 w-3" />
             </a>
           </div>
@@ -135,23 +142,30 @@ async function GitHubContent() {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-5 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors group"
+                className="block terminal-block hover-glow group"
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <BookOpen className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <h4 className="font-semibold text-foreground truncate">{repo.name}</h4>
+                <div className="flex items-center gap-1.5 px-4 py-2 border-b border-border/50 bg-background/50">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
                 </div>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-4 h-10">
-                  {repo.description || "No description provided."}
-                </p>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                  {repo.language && (
-                    <span className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-primary/70"></span>
-                      {repo.language}
-                    </span>
-                  )}
-                  <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <h4 className="font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
+                  </div>
+                  <p className="text-sm font-display text-muted-foreground line-clamp-2 mb-4 h-10">
+                    {repo.description || "No description provided."}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs font-display text-muted-foreground">
+                    {repo.language && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-primary/70"></span>
+                        {repo.language}
+                      </span>
+                    )}
+                    <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+                  </div>
                 </div>
               </a>
             ))}
