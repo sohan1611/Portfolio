@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ThemeToggle } from "./ThemeToggle";
 import { portfolioData } from "@/data/portfolio";
 
 const NAV_LINKS = [
@@ -53,13 +52,10 @@ export function Navbar() {
               </span>
             </Link>
           ))}
-          <ThemeToggle />
         </nav>
         
-        {/* Mobile Nav Toggle can be handled via Command Palette or a simple menu later, 
-            for now just keeping the Theme Toggle visible on mobile */}
+        {/* Mobile Nav Toggle can be handled via Command Palette or a simple menu later */}
         <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
           <span className="text-xs text-muted-foreground">Press /</span>
         </div>
       </div>
