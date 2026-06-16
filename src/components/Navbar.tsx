@@ -28,22 +28,17 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full transition-colors duration-300 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "glass-surface bg-background/80"
-          : "bg-transparent"
+          ? "bg-background/75 backdrop-blur-md border-b border-border/50 shadow-sm"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <Link href="#home" className="text-sm font-display font-bold tracking-tight text-foreground hover:text-accent transition-colors">
+          <Link href="#home" className="text-sm font-display font-bold tracking-tight text-slate-900/85 dark:text-slate-200/85 hover:text-slate-900 dark:hover:text-white transition-colors duration-300">
             {portfolioData.personal.name}
           </Link>
-          {portfolioData.personal.openToInternship && (
-            <span className="hidden md:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
-              Open to Internship Opportunities
-            </span>
-          )}
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -51,11 +46,10 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-display font-medium text-muted-foreground hover:text-accent transition-colors relative group"
+              className="text-sm font-display font-medium text-slate-900/80 dark:text-slate-200/80 hover:text-slate-900 dark:hover:text-white transition-colors duration-300 relative"
             >
               <span className="relative">
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
               </span>
             </Link>
           ))}
