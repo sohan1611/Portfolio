@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Section } from "../ui/Section";
 import { GitCommit, BookOpen, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
+import { Reveal } from "../ui/Reveal";
 
 interface GitHubRepo {
   id: number;
@@ -79,19 +80,23 @@ function GitHubSkeleton() {
 function GitHubFallback() {
   return (
     <Section id="github" className="border-t border-border">
-      <div className="flex items-center gap-3 mb-6">
-        <GitCommit className="h-8 w-8 text-primary" />
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Profile</h2>
-          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+      <Reveal>
+        <div className="flex items-center gap-3 mb-6">
+          <GitCommit className="h-8 w-8 text-primary" />
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Profile</h2>
+            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+          </div>
         </div>
-      </div>
-      <div className="p-6 rounded-xl bg-card border border-border text-center">
-        <p className="text-muted-foreground mb-4">View my full open-source portfolio and recent activity directly on GitHub.</p>
-        <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-primary hover:underline">
-          Visit @sohan1611 <ExternalLink className="ml-1 h-3.5 w-3.5" />
-        </a>
-      </div>
+      </Reveal>
+      <Reveal delay={50}>
+        <div className="p-6 rounded-xl bg-card border border-border text-center">
+          <p className="text-muted-foreground mb-4">View my full open-source portfolio and recent activity directly on GitHub.</p>
+          <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-primary hover:underline transition-transform duration-200 hover:-translate-y-0.5">
+            Visit @sohan1611 <ExternalLink className="ml-1 h-3.5 w-3.5" />
+          </a>
+        </div>
+      </Reveal>
     </Section>
   );
 }
@@ -106,37 +111,43 @@ async function GitHubContent() {
   return (
     <Section id="github" className="border-t border-border">
       <div className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <GitCommit className="h-8 w-8 text-primary" />
-            <div>
-              <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
-              <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+        <Reveal>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <GitCommit className="h-8 w-8 text-primary" />
+              <div>
+                <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
+                <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-lg border border-border">
+              <span className="text-sm font-display font-medium text-foreground">{data.user.public_repos}</span>
+              <span className="text-sm font-display text-muted-foreground">Public Repositories</span>
             </div>
           </div>
-          
-          <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-lg border border-border">
-            <span className="text-sm font-display font-medium text-foreground">{data.user.public_repos}</span>
-            <span className="text-sm font-display text-muted-foreground">Public Repositories</span>
-          </div>
-        </div>
+        </Reveal>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-display font-semibold text-foreground">Recent Repositories</h3>
-            <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm font-display text-primary hover:text-accent transition-colors hidden sm:flex items-center">
-              View Profile <ExternalLink className="ml-1 h-3 w-3" />
-            </a>
+            <Reveal delay={50}>
+              <h3 className="text-xl font-display font-semibold text-foreground">Recent Repositories</h3>
+            </Reveal>
+            <Reveal delay={50}>
+              <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm font-display text-primary hover:text-accent transition-all duration-200 hover:-translate-y-0.5 hidden sm:flex items-center">
+                View Profile <ExternalLink className="ml-1 h-3 w-3" />
+              </a>
+            </Reveal>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {data.repos.map((repo: GitHubRepo) => (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] bg-card hover:border-primary/50 hover:shadow-sm transition-all group"
-              >
+            {data.repos.map((repo: GitHubRepo, index: number) => (
+              <Reveal key={repo.id} delay={100 + index * 60}>
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] glass-surface hover-glow transition-all duration-300 hover:-translate-y-0.5 group"
+                >
                 <div className="flex items-center gap-2 mb-3">
                   <BookOpen className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                   <h4 className="text-lg font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
@@ -153,12 +164,15 @@ async function GitHubContent() {
                   )}
                   <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
                 </div>
-              </a>
+                </a>
+              </Reveal>
             ))}
           </div>
-          <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex sm:hidden items-center mt-4">
-            View full profile on GitHub <ExternalLink className="ml-1 h-3 w-3" />
-          </a>
+          <Reveal delay={200}>
+            <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex sm:hidden items-center mt-4 transition-transform duration-200 hover:-translate-y-0.5">
+              View full profile on GitHub <ExternalLink className="ml-1 h-3 w-3" />
+            </a>
+          </Reveal>
         </div>
       </div>
     </Section>
