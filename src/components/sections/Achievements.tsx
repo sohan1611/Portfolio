@@ -77,6 +77,7 @@ export function Achievements() {
       );
     }
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={fileUrl}
         alt={`${title} Certificate`}
