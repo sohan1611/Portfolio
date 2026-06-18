@@ -5,6 +5,7 @@ import { Section } from "../ui/Section";
 import { Mail, FileText, Copy, CheckCircle2 } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { useState } from "react";
+import { Reveal } from "../ui/Reveal";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
@@ -21,11 +22,14 @@ export function Contact() {
         
         {/* Resume Summary Card */}
         <div id="resume" className="space-y-6">
+        <Reveal>
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold tracking-tight text-foreground">Resume Overview</h2>
           </div>
+        </Reveal>
           
-          <div className="p-8 rounded-2xl bg-card border border-border shadow-sm">
+        <Reveal delay={80}>
+          <div className="p-8 rounded-2xl glass-surface">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div>
@@ -59,16 +63,18 @@ export function Contact() {
               <a
                 href={portfolioData.personal.resumeUrl}
                 download
-                className="inline-flex h-10 items-center justify-center rounded-md bg-foreground px-6 text-sm font-medium text-background shadow transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-foreground px-6 text-sm font-medium text-background shadow transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <FileText className="mr-2 h-4 w-4" /> Download Full PDF Resume
               </a>
             </div>
           </div>
+        </Reveal>
         </div>
 
         {/* Contact Links */}
-        <div className="text-center pt-8 border-t border-border/50">
+        <Reveal>
+          <div className="text-center pt-8 border-t border-border/50">
           <h2 className="text-2xl font-bold tracking-tight mb-4 text-foreground">Let&apos;s Connect</h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
             Ready to contribute to impactful engineering teams. Feel free to reach out via email or connect on LinkedIn.
@@ -79,13 +85,13 @@ export function Contact() {
               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${portfolioData.personal.email}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
               <Mail className="mr-2 h-4 w-4" /> Send Email
             </a>
             <button
               onClick={handleCopyEmail}
-              className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md border border-border bg-card px-8 text-sm font-medium shadow-sm transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground"
+              className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md border border-border bg-card px-8 text-sm font-medium shadow-sm transition-all duration-200 hover:bg-muted hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground"
             >
               {copied ? (
                 <><CheckCircle2 className="mr-2 h-4 w-4 text-emerald-500" /> Copied!</>
@@ -115,7 +121,8 @@ export function Contact() {
               <FaGithub className="h-5 w-5" />
             </a>
           </div>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </Section>
   );

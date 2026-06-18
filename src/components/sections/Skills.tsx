@@ -1,5 +1,8 @@
+"use client";
+
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
+import { Reveal } from "../ui/Reveal";
 import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench, Bot } from "lucide-react";
 import React from "react";
 
@@ -26,34 +29,54 @@ function SkillCard({ title, items, icon: Icon }: { title: string, items: string[
   );
 }
 
+const skillCards = [
+  { title: "Programming Languages", key: "programmingLanguages" as const, icon: Code2 },
+  { title: "Frameworks & Libraries", key: "frameworks" as const, icon: Layers },
+  { title: "Databases & ORM", key: "databases" as const, icon: Database },
+  { title: "AI & APIs", key: "ai" as const, icon: Cpu },
+  { title: "Authentication & Integrations", key: "auth" as const, icon: Lock },
+  { title: "Cloud & Deployment", key: "cloud" as const, icon: Cloud },
+  { title: "Engineering Tools", key: "tools" as const, icon: Wrench },
+  { title: "AI-Assisted Development", key: "aiDev" as const, icon: Bot },
+];
+
+const interestCards = [
+  { title: "Areas of Interest", key: "interests" as const, icon: Brain },
+  { title: "Currently Learning", key: "currentlyLearning" as const, icon: Sparkles },
+];
+
 export function Skills() {
   return (
     <Section id="skills">
       <div className="space-y-12">
-        <div>
-          <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Technical Arsenal</h2>
-          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-        </div>
+        <Reveal>
+          <div>
+            <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Technical Arsenal</h2>
+            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+          </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <SkillCard title="Programming Languages" items={portfolioData.skills.programmingLanguages} icon={Code2} />
-          <SkillCard title="Frameworks & Libraries" items={portfolioData.skills.frameworks} icon={Layers} />
-          <SkillCard title="Databases & ORM" items={portfolioData.skills.databases} icon={Database} />
-          <SkillCard title="AI & APIs" items={portfolioData.skills.ai} icon={Cpu} />
-          <SkillCard title="Authentication & Integrations" items={portfolioData.skills.auth} icon={Lock} />
-          <SkillCard title="Cloud & Deployment" items={portfolioData.skills.cloud} icon={Cloud} />
-          <SkillCard title="Engineering Tools" items={portfolioData.skills.tools} icon={Wrench} />
-          <SkillCard title="AI-Assisted Development" items={portfolioData.skills.aiDev} icon={Bot} />
+          {skillCards.map((card, i) => (
+            <Reveal key={card.key} delay={i * 50}>
+              <SkillCard title={card.title} items={portfolioData.skills[card.key]} icon={card.icon} />
+            </Reveal>
+          ))}
         </div>
 
-        <div className="pt-12">
-          <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Interests & Learning</h2>
-          <div className="h-1 w-12 bg-primary rounded"></div>
-        </div>
+        <Reveal>
+          <div className="pt-12">
+            <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Interests & Learning</h2>
+            <div className="h-1 w-12 bg-primary rounded"></div>
+          </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <SkillCard title="Areas of Interest" items={portfolioData.skills.interests} icon={Brain} />
-          <SkillCard title="Currently Learning" items={portfolioData.skills.currentlyLearning} icon={Sparkles} />
+          {interestCards.map((card, i) => (
+            <Reveal key={card.key} delay={i * 60}>
+              <SkillCard title={card.title} items={portfolioData.skills[card.key]} icon={card.icon} />
+            </Reveal>
+          ))}
         </div>
       </div>
     </Section>

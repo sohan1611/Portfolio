@@ -5,6 +5,7 @@ import { Section } from "../ui/Section";
 import { Award, Eye, Download, X, Clock } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { Reveal } from "../ui/Reveal";
 
 interface Certificate {
   title: string;
@@ -87,17 +88,19 @@ export function Achievements() {
   return (
     <Section id="achievements" className="border-t border-border bg-background">
       <div className="max-w-4xl space-y-8">
-        <div>
-          <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Certifications</h2>
-          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-        </div>
+        <Reveal>
+          <div>
+            <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Certifications</h2>
+            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
+          </div>
+        </Reveal>
 
         <div className="space-y-6">
           {portfolioData.achievements.map((item, index) => (
-            <div 
-              key={index} 
-              className="p-6 rounded-xl glass-surface hover-glow flex flex-col md:flex-row md:items-center justify-between gap-6"
-            >
+            <Reveal key={index} delay={index * 60}>
+              <div 
+                className="p-6 rounded-xl glass-surface hover-glow flex flex-col md:flex-row md:items-center justify-between gap-6"
+              >
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-muted rounded-full shrink-0">
                   <Award className="h-6 w-6 text-primary" />
@@ -123,7 +126,7 @@ export function Achievements() {
                 <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                   <button
                     onClick={() => setSelectedCert(item as Certificate)}
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-display font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-display font-medium text-primary-foreground transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label={`View ${item.title} certificate`}
                   >
                     <Eye className="mr-2 h-4 w-4" /> View Certificate
@@ -133,7 +136,7 @@ export function Achievements() {
                     <a
                       href={item.certificateFile}
                       download
-                      className="inline-flex h-10 items-center justify-center rounded-md border border-primary px-4 text-sm font-display font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="inline-flex h-10 items-center justify-center rounded-md border border-primary px-4 text-sm font-display font-medium text-primary transition-all duration-200 hover:bg-primary/10 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       aria-label={`Download ${item.title} certificate`}
                     >
                       <Download className="mr-2 h-4 w-4" /> Download Certificate
@@ -141,7 +144,8 @@ export function Achievements() {
                   )}
                 </div>
               )}
-            </div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
