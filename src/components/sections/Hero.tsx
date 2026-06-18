@@ -9,20 +9,20 @@ export function Hero() {
   return (
     <Section id="home" className="min-h-[60vh] flex flex-col justify-center pt-32 pb-16">
       <div className="max-w-3xl space-y-6">
-        <Reveal>
+        <Reveal once={true}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground mb-8 leading-tight">
             <span className="block mb-2">Building AI Systems,</span>
             <span className="block mb-2">Data-Driven Products &</span>
             <span className="block text-primary">Modern Web Applications</span>
           </h1>
         </Reveal>
-        <Reveal delay={80}>
+        <Reveal delay={80} once={true}>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
             {portfolioData.personal.subheadline}
           </p>
         </Reveal>
         
-        <Reveal delay={150}>
+        <Reveal delay={150} once={true}>
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Link
               href="#projects"
@@ -40,7 +40,7 @@ export function Hero() {
           </div>
         </Reveal>
         
-        <Reveal delay={200}>
+        <Reveal delay={200} once={true}>
           <div className="flex items-center gap-4 pt-6 text-muted-foreground">
             <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
               <FaGithub className="h-5 w-5" />
