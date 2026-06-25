@@ -61,7 +61,7 @@ export const portfolioData = {
       ],
       technologies: ["Multi-Agent AI", "Due Diligence", "Investment Analysis"],
       githubUrl: "https://github.com/sohan1611/apex-intel",
-      liveUrl: null,
+      liveUrl: "https://apex-intel-nine.vercel.app",
       status: "In Progress"
     },
     {
