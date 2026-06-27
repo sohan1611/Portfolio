@@ -18,7 +18,7 @@ export const portfolioData = {
     { title: "Availability", value: "Open to Internship Opportunities" }
   ],
   about: {
-    content: "I am a B.Tech Computer Science and Engineering student at KIIT University with a growing focus on Artificial Intelligence, Data Architecture, and Cybersecurity.\n\nMy projects explore how intelligent systems can analyze information, automate decisions, and generate meaningful insights. I enjoy combining AI models, modern software engineering, and scalable data systems to build solutions that are practical, reliable, and impactful.\n\nCurrently, I am expanding my knowledge in Data Structures & Algorithms, Data Architecture, and AI-assisted development while actively building real-world projects."
+    content: "I am a B.Tech Computer Science and Engineering student at KIIT University focused on Artificial Intelligence, Data Architecture, and Cybersecurity. I enjoy designing intelligent systems that combine AI, data, and software engineering to solve practical problems. Through projects like Apex Intel, SentinelIQ, and Reality Drift, I am building a strong foundation in creating scalable, data-driven applications while continuously expanding my knowledge of modern AI and software engineering."
   },
   education: [
     {
