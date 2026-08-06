@@ -14,6 +14,7 @@ interface GitHubRepo {
 }
 
 const FALLBACK_DESCRIPTIONS: Record<string, string> = {
+  "aspirova": "AI-powered opportunity almanac indexing internships, jobs, fellowships, and research programmes from across the web.",
   "portfolio": "Personal portfolio website showcasing projects, skills, certifications, and technical interests.",
   "reality-drift": "AI-powered life pattern simulator for habit analysis and behavioral forecasting.",
   "apex-intel": "Autonomous multi-agent due diligence platform for startup evaluation and investment analysis.",
@@ -25,7 +26,7 @@ async function getGitHubData() {
     const username = "sohan1611";
     const [userRes, reposRes] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 3600 } }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`, { next: { revalidate: 3600 } })
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, { next: { revalidate: 3600 } })
     ]);
 
     if (!userRes.ok || !reposRes.ok) {
@@ -36,7 +37,7 @@ async function getGitHubData() {
     const user = await userRes.json();
     const repos = await reposRes.json();
 
-    const preferredNames = ["apex-intel", "sentineliq", "reality-drift", "portfolio"];
+    const preferredNames = ["aspirova", "apex-intel", "sentineliq", "reality-drift", "portfolio"];
     const filteredRepos = repos
       .filter((repo: GitHubRepo) =>
         preferredNames.includes(repo.name.toLowerCase())
