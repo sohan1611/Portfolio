@@ -53,3 +53,42 @@ npm run dev
 npm run build
 npm run lint
 ```
+
+## New machine setup
+
+Everything the site needs is committed — content, resume PDF, certificates, config. `git clone`
+plus `npm install` gives a working build. Two things do **not** travel with the repo:
+
+### 1. Git identity — do this before the first commit
+
+`user.name` and `user.email` live in global git config, not in the repo. On a fresh machine git
+falls back to a generated default, which would put a second name in the contributors list and
+break the rule above.
+
+```bash
+git config --global user.name "sohan1611"
+git config --global user.email "sohanmandal1611@gmail.com"
+```
+
+Then verify — this must print exactly one line:
+
+```bash
+git log --all --format="%an|%ae|%cn|%ce" | sort -u
+```
+
+Expected: `sohan1611|sohanmandal1611@gmail.com|sohan1611|sohanmandal1611@gmail.com`
+
+### 2. Vercel link — only for CLI deploys
+
+`.vercel/` is ignored. Pushing to `main` deploys through the GitHub integration and needs
+nothing local. Run `vercel link` and pick `sohan-portfolio` only if you want the `vercel` CLI.
+
+### First run
+
+```bash
+npm install
+npm run dev
+```
+
+Vercel builds on Node 24.x. `.claude/`, `.next/`, `node_modules/` and `next-env.d.ts` are
+ignored and regenerate on their own — do not copy them across.
