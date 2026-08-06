@@ -4,6 +4,7 @@ import { Reveal } from "../ui/Reveal";
 import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { ViewResumeButton } from "../ui/ViewResumeButton";
 
 export function Hero() {
   return (
@@ -30,6 +31,7 @@ export function Hero() {
             >
               View Projects <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
+            <ViewResumeButton className="inline-flex h-10 items-center justify-center rounded-md border border-border bg-background px-6 text-sm font-medium shadow-sm transition-all duration-200 hover:bg-muted hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground" />
             <a
               href={portfolioData.personal.resumeUrl}
               download

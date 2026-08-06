@@ -6,6 +6,7 @@ import { Mail, FileText, Copy, CheckCircle2 } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { Reveal } from "../ui/Reveal";
+import { ViewResumeButton } from "../ui/ViewResumeButton";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
@@ -59,11 +60,15 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-border flex justify-center">
+            <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-center gap-4">
+              <ViewResumeButton
+                label="View Full PDF Resume"
+                className="inline-flex h-10 w-full sm:w-auto items-center justify-center rounded-md border border-border bg-card px-6 text-sm font-medium text-foreground shadow-sm transition-all duration-200 hover:bg-muted hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              />
               <a
                 href={portfolioData.personal.resumeUrl}
                 download
-                className="inline-flex h-10 items-center justify-center rounded-md bg-foreground px-6 text-sm font-medium text-background shadow transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-10 w-full sm:w-auto items-center justify-center rounded-md bg-foreground px-6 text-sm font-medium text-background shadow transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <FileText className="mr-2 h-4 w-4" /> Download Full PDF Resume
               </a>
