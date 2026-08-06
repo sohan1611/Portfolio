@@ -13,6 +13,10 @@ interface GitHubRepo {
   updated_at: string;
 }
 
+// How many of the most recently updated repositories to surface.
+const RECENT_REPO_COUNT = 4;
+
+// Only used when a repository has no description set on GitHub.
 const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   "aspirova": "AI-powered opportunity almanac indexing internships, jobs, fellowships, and research programmes from across the web.",
   "portfolio": "Personal portfolio website showcasing projects, skills, certifications, and technical interests.",
@@ -26,7 +30,7 @@ async function getGitHubData() {
     const username = "sohan1611";
     const [userRes, reposRes] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 3600 } }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, { next: { revalidate: 3600 } })
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=${RECENT_REPO_COUNT}`, { next: { revalidate: 3600 } })
     ]);
 
     if (!userRes.ok || !reposRes.ok) {
@@ -37,17 +41,16 @@ async function getGitHubData() {
     const user = await userRes.json();
     const repos = await reposRes.json();
 
-    const preferredNames = ["aspirova", "apex-intel", "sentineliq", "reality-drift", "portfolio"];
-    const filteredRepos = repos
-      .filter((repo: GitHubRepo) =>
-        preferredNames.includes(repo.name.toLowerCase())
-      )
+    // The API already returns these sorted by most recently updated, so the
+    // section stays current on its own as repositories are pushed to.
+    const recentRepos = repos
+      .slice(0, RECENT_REPO_COUNT)
       .map((repo: GitHubRepo) => ({
         ...repo,
         description: repo.description?.trim() || FALLBACK_DESCRIPTIONS[repo.name.toLowerCase()] || "No description provided.",
       }));
 
-    return { user, repos: filteredRepos };
+    return { user, repos: recentRepos };
   } catch (error) {
     console.error("Failed to fetch GitHub data:", error);
     return null;
