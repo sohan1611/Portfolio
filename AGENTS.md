@@ -127,10 +127,9 @@ file:line so they can be confirmed before work starts. Confirm, then implement, 
 
 ### High value
 
-- [ ] **No OpenGraph image.** `src/app/layout.tsx` sets `openGraph` but no `images`. Every
-      share of this link on LinkedIn / WhatsApp / Twitter renders a bare text preview. For a
-      portfolio sent to recruiters this is the highest-leverage fix on the list. Add an
-      `opengraph-image.tsx` (Next renders it at build) or a static 1200×630 asset.
+- [x] **No OpenGraph image.** Done 2026-08-06 — `src/app/opengraph-image.tsx` renders a
+      1200×630 card at build time via `next/og`, and `layout.tsx` gained a
+      `twitter: { card: "summary_large_image" }` block. Verified against a production build.
 
 - [ ] **`prefers-reduced-motion` is not honoured.** `src/components/ui/Reveal.tsx:16` sets up
       the observer unconditionally and always animates opacity/transform. Users with the OS

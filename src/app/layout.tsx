@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sohan Mandal | Portfolio",
+    description: portfolioData.personal.subheadline,
+  },
   robots: {
     index: true,
     follow: true,
