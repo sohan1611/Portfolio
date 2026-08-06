@@ -99,6 +99,14 @@ export const portfolioData = {
   ],
   achievements: [
     {
+      title: "Machine Learning & Agentic AI",
+      issuer: "E&ICT Academy, IIT Roorkee",
+      status: "Completed",
+      certificateFile: "/certificates/eict-iitr-ml-agentic-ai-certificate.jpg",
+      showViewButton: true,
+      showDownloadButton: true,
+    },
+    {
       title: "Build with AI Certification",
       issuer: "GeeksforGeeks",
       status: "Completed",
