@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { portfolioData } from '@/data/portfolio';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://sohanmandal.com/sitemap.xml', // Adjust URL as necessary
+    sitemap: `${portfolioData.personal.siteUrl}/sitemap.xml`,
   };
 }

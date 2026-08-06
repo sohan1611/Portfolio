@@ -3,6 +3,7 @@ export const portfolioData = {
     name: "Sohan Mandal",
     headline: "Building AI Systems, Data-Driven Products & Modern Web Applications",
     subheadline: "B.Tech CSE student at KIIT University with a strong interest in Artificial Intelligence, Data Architecture, and Cybersecurity. I enjoy building intelligent systems that combine AI, data, and software engineering to solve practical, real-world problems.",
+    siteUrl: "https://sohan16.com",
     email: "sohanmandal1611@gmail.com",
     phone: "+91 9830322351",
     github: "https://github.com/sohan1611",
@@ -29,13 +30,13 @@ export const portfolioData = {
     }
   ],
   skills: {
-    programmingLanguages: ["C", "Java", "Python", "SQL"],
-    frameworks: ["Next.js", "FastAPI", "Express.js"],
+    programmingLanguages: ["Python", "TypeScript", "JavaScript", "Java", "C", "SQL"],
+    frameworks: ["Next.js", "React", "FastAPI", "Express.js", "Tailwind CSS"],
     databases: ["PostgreSQL", "Supabase", "pgvector", "Redis", "Prisma ORM", "SQLAlchemy"],
-    ai: ["OpenAI API", "Gemini API", "Serper API", "Resend"],
+    ai: ["OpenAI API", "Gemini API", "Serper API", "Resend", "Vector Embeddings", "Semantic Search"],
     auth: ["Google OAuth"],
-    cloud: ["Vercel", "Railway", "Google Cloud Run"],
-    tools: ["Git", "GitHub", "Antigravity"],
+    cloud: ["Vercel", "Railway", "Google Cloud Run", "Upstash"],
+    tools: ["Git", "GitHub", "GitHub Actions", "Docker", "Antigravity"],
     aiDev: ["Antigravity", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "AI-Assisted Full Stack Development"],
     currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "AI-Assisted Full Stack Development"]

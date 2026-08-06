@@ -16,14 +16,19 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const siteUrl = portfolioData.personal.siteUrl;
+
 export const metadata: Metadata = {
   title: "Sohan Mandal | Software Engineering Portfolio",
   description: portfolioData.personal.subheadline,
-  metadataBase: new URL('https://sohanmandal.com'),
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Sohan Mandal | Portfolio",
     description: portfolioData.personal.subheadline,
-    url: "https://sohanmandal.com",
+    url: siteUrl,
     siteName: "Sohan Mandal",
     locale: "en_US",
     type: "website",
@@ -49,10 +54,10 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://sohanmandal.com/#person",
+        "@id": `${siteUrl}/#person`,
         "name": portfolioData.personal.name,
         "jobTitle": "Software Engineering Intern Candidate",
-        "url": "https://sohanmandal.com",
+        "url": siteUrl,
         "sameAs": [
           portfolioData.personal.linkedin,
           portfolioData.personal.github
@@ -64,11 +69,11 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://sohanmandal.com/#website",
-        "url": "https://sohanmandal.com",
+        "@id": `${siteUrl}/#website`,
+        "url": siteUrl,
         "name": "Sohan Mandal Portfolio",
         "publisher": {
-          "@id": "https://sohanmandal.com/#person"
+          "@id": `${siteUrl}/#person`
         }
       }
     ]

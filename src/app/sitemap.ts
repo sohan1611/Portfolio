@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
+import { portfolioData } from '@/data/portfolio';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://sohanmandal.com', // Adjust URL as necessary
+      url: portfolioData.personal.siteUrl,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,

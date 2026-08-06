@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Section } from "../ui/Section";
 import { GitCommit, BookOpen, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
@@ -57,30 +56,6 @@ async function getGitHubData() {
   }
 }
 
-function GitHubSkeleton() {
-  return (
-    <Section id="github" className="border-t border-border">
-      <div className="flex items-center gap-3 mb-6">
-        <GitCommit className="h-8 w-8 text-primary" />
-        <div>
-          <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
-          <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="p-6 rounded-xl border border-border/50 dark:border-slate-800 bg-card animate-pulse">
-            <div className="h-5 w-40 bg-muted rounded mb-3"></div>
-            <div className="h-4 w-full bg-muted rounded mb-2"></div>
-            <div className="h-4 w-2/3 bg-muted rounded mb-5"></div>
-            <div className="h-3 w-24 bg-muted rounded"></div>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
 function GitHubFallback() {
   return (
     <Section id="github" className="border-t border-border">
@@ -105,7 +80,11 @@ function GitHubFallback() {
   );
 }
 
-async function GitHubContent() {
+// Rendered directly rather than behind <Suspense>. The page is statically
+// prerendered with an hourly revalidate, so the data is already resolved at
+// build time and a streaming boundary only risks the fallback being left in
+// place if the client-side reveal never runs.
+export async function GitHubActivity() {
   const data = await getGitHubData();
 
   if (!data) {
@@ -180,13 +159,5 @@ async function GitHubContent() {
         </div>
       </div>
     </Section>
-  );
-}
-
-export function GitHubActivity() {
-  return (
-    <Suspense fallback={<GitHubSkeleton />}>
-      <GitHubContent />
-    </Suspense>
   );
 }
