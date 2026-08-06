@@ -73,9 +73,54 @@ The component now renders directly, without Suspense. **Do not reintroduce a Sus
 here.** If you add one anywhere else, verify against a production build that the HTML contains
 no `id="S:0"` and no `$RC(` calls.
 
+## 6. Machine setup and migration
+
+This repo is worked on from more than one machine, by both agents. Everything the site needs
+is committed — content, resume PDF, certificates, config. `git clone` + `npm install` builds.
+
+Full setup detail is in `CLAUDE.md` § *New machine setup*. The one step repeated here because
+getting it wrong silently breaks §1 above:
+
+### Git identity — before the first commit on any machine
+
+`user.name` / `user.email` live in **global** git config, not in the repo, so they do not
+travel with a clone. Git falls back to a generated default like `user@hostname`, which puts a
+second name in the contributors list.
+
+```bash
+git config --global user.name "sohan1611"
+git config --global user.email "sohanmandal1611@gmail.com"
+```
+
+Verify — must print exactly one line, `sohan1611|sohanmandal1611@gmail.com|sohan1611|sohanmandal1611@gmail.com`:
+
+```bash
+git log --all --format="%an|%ae|%cn|%ce" | sort -u
+```
+
+### Leaving a machine
+
+- [ ] `git status -sb` clean, and `git log origin/main -1` matches local `HEAD` — unpushed
+      commits do not travel
+- [ ] Vercel deploy for that commit is green
+- [ ] Nothing to salvage from `.next/`, `.vercel/`, `node_modules/`, `.claude/` — all ignored
+      and all regenerate
+- [ ] Agent memory is machine-local and does **not** follow the repo. Claude's lives under
+      `~/.claude/projects/<project-slug>/memory/`. Copy it only if you want continuity; the
+      durable rules are already in `CLAUDE.md` and this file.
+
+### Arriving on a machine
+
+- [ ] Set git identity (above) and run the verify command
+- [ ] `git clone` → `npm install` → `npm run lint` → `npm run build`, all clean
+- [ ] `vercel link` → `sohan-portfolio`, only if you want CLI deploys. Pushing to `main`
+      deploys through the GitHub integration without it.
+- [ ] Re-authenticate each agent's CLI — that auth is machine-local and is not in the repo
+- [ ] Confirm both entry docs are picked up: Codex reads `AGENTS.md`, Claude reads `CLAUDE.md`
+
 ---
 
-## 6. Work queue
+## 7. Work queue
 
 Claude maintains this. Items are **candidates found by reading the code** — each cites
 file:line so they can be confirmed before work starts. Confirm, then implement, then tick.

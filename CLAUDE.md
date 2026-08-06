@@ -5,8 +5,9 @@ Live at **https://sohan16.com** (`personal.siteUrl` in `src/data/portfolio.ts` i
 source of truth — metadata, JSON-LD, sitemap and robots all derive from it).
 
 > **See also `AGENTS.md`** — the shared working agreement with Codex, which carries the
-> current work queue and a record of the streaming-Suspense trap. Claude plans and reviews;
-> Codex implements. Keep the rules in the two files consistent.
+> current work queue, the machine-migration checklist, and a record of the
+> streaming-Suspense trap. Both agents work this repo, on more than one machine: Claude plans,
+> architects and reviews; Codex implements. Keep the rules in the two files consistent.
 
 ## Attribution (non-negotiable)
 
