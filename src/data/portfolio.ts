@@ -31,7 +31,7 @@ export const portfolioData = {
   skills: {
     programmingLanguages: ["C", "Java", "Python", "SQL"],
     frameworks: ["Next.js", "FastAPI", "Express.js"],
-    databases: ["PostgreSQL", "Prisma ORM", "SQLAlchemy"],
+    databases: ["PostgreSQL", "Supabase", "pgvector", "Redis", "Prisma ORM", "SQLAlchemy"],
     ai: ["OpenAI API", "Gemini API", "Serper API", "Resend"],
     auth: ["Google OAuth"],
     cloud: ["Vercel", "Railway", "Google Cloud Run"],
