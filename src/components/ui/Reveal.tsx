@@ -2,6 +2,24 @@
 
 import * as React from "react";
 
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeToReducedMotion(onStoreChange: () => void) {
+  if (typeof window === "undefined" || !window.matchMedia) return () => {};
+  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
@@ -12,8 +30,15 @@ interface RevealProps {
 export function Reveal({ children, className = "", delay = 0, once = false }: RevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = React.useState(false);
+  const prefersReducedMotion = React.useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 
   React.useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const el = ref.current;
     if (!el) return;
 
@@ -35,17 +60,19 @@ export function Reveal({ children, className = "", delay = 0, once = false }: Re
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [once]);
+  }, [once, prefersReducedMotion]);
 
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(14px)",
+        opacity: prefersReducedMotion || isVisible ? 1 : 0,
+        transform: prefersReducedMotion || isVisible ? "translateY(0)" : "translateY(14px)",
         // Remove delay on exit so it hides immediately when out of view
-        transition: isVisible
+        transition: prefersReducedMotion
+          ? "none"
+          : isVisible
           ? `opacity 300ms ease-out ${delay}ms, transform 300ms ease-out ${delay}ms`
           : `opacity 300ms ease-out, transform 300ms ease-out`,
       }}

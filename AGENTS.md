@@ -131,10 +131,14 @@ file:line so they can be confirmed before work starts. Confirm, then implement, 
       1200×630 card at build time via `next/og`, and `layout.tsx` gained a
       `twitter: { card: "summary_large_image" }` block. Verified against a production build.
 
-- [ ] **`prefers-reduced-motion` is not honoured.** `src/components/ui/Reveal.tsx:16` sets up
-      the observer unconditionally and always animates opacity/transform. Users with the OS
-      reduced-motion setting still get every fade-up. Gate the animation on
-      `window.matchMedia('(prefers-reduced-motion: reduce)')` and render content visible.
+- [x] **`prefers-reduced-motion` is not honoured.** Done 2026-08-06. Three places animated
+      unconditionally, all now gated: `Reveal.tsx` subscribes to the media query with
+      `useSyncExternalStore` and renders content visible with `transition: none` (no
+      observer at all in that mode); `scroll-behavior: smooth` moved from Tailwind's
+      `scroll-smooth` class on `<html>` into `globals.css` with a reduced-motion override;
+      `CommandPalette.tsx` drops its panel scale via Framer's `useReducedMotion`, keeping
+      the opacity crossfade. No blanket `!important` motion reset — it would have killed the
+      intentional hover lift and could not fix Reveal's `opacity: 0` initial state anyway.
 
 - [ ] **Certificate image is 476KB, unoptimised.** `public/certificates/eict-iitr-ml-agentic-ai-certificate.jpg`
       is served through a raw `<img>` in `Achievements.tsx:81` with an `eslint-disable` for

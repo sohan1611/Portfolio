@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
@@ -22,6 +22,7 @@ export function CommandPalette() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const router = useRouter();
+  const prefersReducedMotion = useReducedMotion();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -59,9 +60,9 @@ export function CommandPalette() {
             onClick={() => setIsOpen(false)}
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15 }}
             className="relative z-50 w-full max-w-lg overflow-hidden rounded-xl border border-border bg-card shadow-2xl mx-4"
           >

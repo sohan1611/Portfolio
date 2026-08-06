@@ -16,4 +16,24 @@ bottom. Gists only — no transcripts, never any secrets.
 - Round 2: all three landed. Verified by Claude — `npm run lint` silent, `npm run build` green
   with `/opengraph-image` in the route list, image rendered against `npx next start` and
   inspected, `og:*` and `twitter:*` tags confirmed in the production HTML with absolute
-  `https://sohan16.com` URLs. Left uncommitted in the working tree.
+  `https://sohan16.com` URLs. Committed as `907f3e2`.
+
+## 2026-08-06 — Work order 2 (Claude → Codex): honour prefers-reduced-motion
+
+- Task: gate all three unconditional animations — `Reveal.tsx`, `scroll-behavior: smooth` on
+  `<html>`, and the CommandPalette panel scale. Scope widened beyond the original queue item,
+  which named only `Reveal.tsx`; honouring the setting in one of three places is not honouring
+  it. Explicitly ruled out a blanket `!important` motion reset.
+- Codex: all four files edited as specced. Sandbox still cannot launch processes, so it ran
+  neither lint nor build.
+- Review: `npm run lint` failed — `react-hooks/set-state-in-effect` on the `useState` +
+  `useEffect` mirror of the media query. Correction sent: a media query is an external store,
+  so use `useSyncExternalStore` with module-scope subscribe/snapshot functions and a
+  `false` server snapshot.
+- Round 2: landed. Verified by Claude — lint silent, build green, page loads with no console
+  or hydration errors, production CSS bundle contains both `scroll-behavior:smooth` and the
+  `prefers-reduced-motion:reduce` override.
+- Caveat: the Reveal fade itself could not be exercised in-session. The browser pane was not
+  compositing, so IntersectionObserver delivered zero callbacks (confirmed directly) and no
+  Reveal ever transitioned. That path is code-reviewed, not runtime-verified — worth a manual
+  look with the OS setting toggled.
