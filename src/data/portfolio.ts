@@ -49,6 +49,22 @@ export const portfolioData = {
   ],
   projects: [
     {
+      title: "Aspirova",
+      problemStatement: "Student opportunities — internships, fellowships, research programmes and competitions — are scattered across hundreds of separate company career pages, so the ones that matter are easy to miss entirely.",
+      solution: "Built an opportunity almanac that crawls company ATS endpoints daily and indexes every listing into one searchable platform, linking each application back to its original source.",
+      keyFeatures: [
+        "19,000+ opportunities indexed across 1,590+ companies",
+        "Automated daily crawlers across 11 ATS sources",
+        "Full-text and vector-based semantic search",
+        "AI resume matching with no per-query LLM calls",
+        "Human-verified recurring programmes and fellowships"
+      ],
+      technologies: ["Career Intelligence", "Vector Search", "Data Aggregation"],
+      githubUrl: "https://github.com/sohan1611/Aspirova",
+      liveUrl: "https://www.aspirova.org",
+      status: "Live"
+    },
+    {
       title: "Apex Intel",
       problemStatement: "Startup due diligence requires extensive research across markets, competitors, risks, and business viability, making investment analysis time-consuming and fragmented.",
       solution: "Built an autonomous multi-agent platform that analyzes startups and generates structured investment memos for investors and analysts.",
