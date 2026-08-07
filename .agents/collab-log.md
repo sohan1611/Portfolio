@@ -139,3 +139,20 @@ to a 200 `image/png`, `twitter:card` is `summary_large_image`, and the shipped C
   in full (clientHeight === scrollHeight) and every `title` matches its rendered text exactly.
   At 1280px descriptions are still 40px two-line boxes, cards all 166px, and footers align in
   both grid rows.
+
+## 2026-08-06 — next 16.2.7 → 16.3.0 (Claude, direct)
+
+Not delegated: this is entirely install-and-verify, and Codex cannot spawn processes on this
+machine. Done by hand per §1 — no bot, no automation.
+
+- `next` and `eslint-config-next` bumped together to 16.3.0. package.json changed those two
+  pins only; lockfile churn was 251/228 lines with no major version moves.
+- Cleared the 3 original advisories (postcss ×3 → 8.5.23 deduped, sharp → 0.35.3). Two
+  dev-only ones then surfaced that the earlier `--production` audit had hidden
+  (`brace-expansion`, `js-yaml`); a plain `npm audit fix` cleared those, 3 dev packages
+  changed. Both `npm audit` and `npm audit --omit=dev` now report 0.
+- Regression pass against a production build: lint silent, build green, `/` static at 1h;
+  §5 Suspense trap has NOT resurfaced (no `$RC(`, no `id="S:0"`, GitHubActivity server-side);
+  headers intact; optimizer and OG image byte-identical to pre-upgrade (46,554 B / 38,263 B);
+  drawer, skip link, clipboard failure path and repo descriptions all still behave; zero
+  uncaught errors.

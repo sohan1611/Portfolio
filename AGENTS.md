@@ -213,10 +213,25 @@ do not "fix" them.
       prerendered with `revalidate: 3600` (§3). Not worth that trade for a static portfolio,
       but it is a live option if the site ever gains a backend.
 
-- [ ] **Three high-severity npm advisories** — `postcss` (×3) and `sharp`/libvips, both
-      transitive under `next@16.2.7`; `next@16.3.0` clears them. sharp matters more now that
-      the certificate image goes through the optimizer. Left for the owner: §1 says
-      dependency bumps are done by hand. Do not run `npm audit fix`.
+- [x] **Three high-severity npm advisories.** Done 2026-08-06. `next` and `eslint-config-next`
+      moved 16.2.7 → 16.3.0 together (they version in lockstep); `package.json` changed those
+      two pins and nothing else. postcss is now 8.5.23 deduped and sharp 0.35.3.
+
+      Two further advisories then appeared that the original report had hidden: it was run as
+      `npm audit --production`, so dev-only findings never showed. `brace-expansion` (under
+      typescript-eslint's minimatch) and `js-yaml` (under eslintrc) are DoS issues in lint
+      tooling with no runtime exposure — cleared with a plain `npm audit fix`, which touched
+      3 dev packages. **`npm audit` now reports 0, and `npm audit --omit=dev` reports 0.**
+
+      Verified against a production build after the bump: lint silent, build green, `/` still
+      statically prerendered at 1h; no `$RC(` or `id="S:0"` in the HTML and GitHubActivity
+      still renders server-side (§5 trap has not resurfaced); security headers still served;
+      image optimizer byte-identical at 46,554 B AVIF; OG image byte-identical at 38,263 B;
+      mobile drawer, skip link, clipboard failure path and repo descriptions all still
+      behave, with zero uncaught errors.
+
+      Note for next time: audit with `npm audit` (everything) and `npm audit --omit=dev`
+      (what actually ships). The `--production` flag alone understates the picture.
 
 ### Correctness / robustness (cont.)
 
