@@ -220,11 +220,18 @@ do not "fix" them.
 
 ### Correctness / robustness (cont.)
 
-- [ ] **Repo card descriptions can be clipped.** `GitHubActivity.tsx` uses `line-clamp-2`
-      together with a fixed `h-10` on the description paragraph. Longer GitHub descriptions
-      are cut without any affordance. Either drop the fixed height or accept the truncation
-      deliberately with a `title` attribute. Note this is a judgement call about intended
-      behaviour, not a defect — decide which you want before speccing it.
+- [x] **Repo card descriptions can be clipped.** Done 2026-08-06 — and measuring first
+      inverted the item's framing. It read as "longer descriptions get cut". In fact, at
+      1280px (518px cards) **nothing** was truncated: all four descriptions occupied exactly
+      two lines. At 375px **all four** were, showing 40px of 60–80px, so a third to a half of
+      every description was hidden on the viewport most visitors use.
+
+      So it was a mobile-only problem, and the `title` option the item suggested does nothing
+      there — phones have no hover. The clamp and fixed height are now `md:`-only
+      (`line-clamp-none h-auto md:line-clamp-2 md:h-10`), which costs nothing on mobile since
+      that grid is single-column. `title` still added for the desktop case a longer future
+      description would hit. Verified: 375px shows every description in full; 1280px keeps
+      40px boxes, 166px cards and aligned footers in both rows.
 
 ### Housekeeping
 

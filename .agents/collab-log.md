@@ -113,3 +113,29 @@ to a 200 `image/png`, `twitter:card` is `summary_large_image`, and the shipped C
   a file over `node -e` for anything containing backslashes.
 - Deferred by decision, recorded in AGENTS.md: full CSP (needs a nonce → middleware → dynamic
   route) and the three npm advisories (owner does dependency bumps by hand).
+- Deployed as `c396132`, Vercel `dpl_Afwkvcx` READY. Re-verified on https://sohan16.com at
+  375px: toggle 44×44, drawer has dialog semantics and all 7 links, focus enters on open, Tab
+  from the last link wraps to the toggle, Escape closes and restores focus, scroll unlocks.
+  All five security headers served, `x-powered-by` absent.
+- Optional hardening noted, not a defect: with the drawer open the background is still present
+  in the accessibility tree. `aria-modal="true"` is set and the focus trap holds, which is the
+  standard approach; adding `inert` to the background would be belt-and-braces for AT that
+  ignores `aria-modal`.
+- Also checked and cleared: the Hero's GitHub/LinkedIn links look unnamed in some tooling
+  output but carry `<span class="sr-only">` labels. Not a finding.
+
+## 2026-08-06 — Work order 7 (Claude → Codex): repo card descriptions
+
+- Measured before speccing, which inverted the queue item's framing. It assumed longer
+  descriptions get cut; in reality desktop truncated *nothing* (all four fit two lines in
+  518px cards) while mobile truncated *everything* (40px shown of 60–80px). A mobile-only
+  problem, and the `title` fix the item proposed is inert on a device with no hover.
+- Task: make the clamp and fixed height `md:`-only so mobile shows full text and the desktop
+  two-line grid alignment is preserved; add `title` for the desktop case; lift the
+  `repo.description || "No description provided."` fallback into one const so the title and
+  the body cannot drift.
+- Codex: first run under GPT-5.6-Sol at `ultra`. Landed in one round, exactly as specced.
+- Review: lint silent, build green, `/` still static. At 375px all four descriptions render
+  in full (clientHeight === scrollHeight) and every `title` matches its rendered text exactly.
+  At 1280px descriptions are still 40px two-line boxes, cards all 166px, and footers align in
+  both grid rows.

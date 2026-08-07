@@ -123,33 +123,40 @@ export async function GitHubActivity() {
             </Reveal>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {data.repos.map((repo: GitHubRepo, index: number) => (
-              <Reveal key={repo.id} delay={100 + index * 60}>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] glass-surface hover-glow transition-all duration-300 hover:-translate-y-0.5 group"
-                >
-                <div className="flex items-center gap-2 mb-3">
-                  <BookOpen className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <h4 className="text-lg font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
-                </div>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-5 h-10">
-                  {repo.description || "No description provided."}
-                </p>
-                <div className="flex items-center gap-4 text-xs font-display text-muted-foreground opacity-80">
-                  {repo.language && (
-                    <span className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-primary/70"></span>
-                      {repo.language}
-                    </span>
-                  )}
-                  <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
-                </div>
-                </a>
-              </Reveal>
-            ))}
+            {data.repos.map((repo: GitHubRepo, index: number) => {
+              const description = repo.description || "No description provided.";
+
+              return (
+                <Reveal key={repo.id} delay={100 + index * 60}>
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] glass-surface hover-glow transition-all duration-300 hover:-translate-y-0.5 group"
+                  >
+                  <div className="flex items-center gap-2 mb-3">
+                    <BookOpen className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <h4 className="text-lg font-display font-semibold text-foreground truncate group-hover:text-primary transition-colors">{repo.name}</h4>
+                  </div>
+                  <p
+                    title={description}
+                    className="text-sm text-muted-foreground line-clamp-none mb-5 h-auto md:line-clamp-2 md:h-10"
+                  >
+                    {description}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs font-display text-muted-foreground opacity-80">
+                    {repo.language && (
+                      <span className="flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-primary/70"></span>
+                        {repo.language}
+                      </span>
+                    )}
+                    <span>Last Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+                  </div>
+                  </a>
+                </Reveal>
+              );
+            })}
           </div>
           <Reveal delay={200}>
             <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex sm:hidden items-center mt-4 transition-transform duration-200 hover:-translate-y-0.5">
