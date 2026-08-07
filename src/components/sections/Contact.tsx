@@ -2,19 +2,41 @@
 
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
-import { Mail, FileText, Copy, CheckCircle2 } from "lucide-react";
+import { Mail, FileText, Copy, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "../ui/Reveal";
 import { ViewResumeButton } from "../ui/ViewResumeButton";
 
 export function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(portfolioData.personal.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopyEmail = async () => {
+    if (resetTimerRef.current) {
+      clearTimeout(resetTimerRef.current);
+    }
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error("Clipboard API is unavailable");
+      }
+
+      await navigator.clipboard.writeText(portfolioData.personal.email);
+      setCopyState("copied");
+      resetTimerRef.current = setTimeout(() => setCopyState("idle"), 2000);
+    } catch {
+      setCopyState("failed");
+      resetTimerRef.current = setTimeout(() => setCopyState("idle"), 4000);
+    }
   };
 
   return (
@@ -98,13 +120,20 @@ export function Contact() {
               onClick={handleCopyEmail}
               className="flex w-full sm:w-auto h-12 items-center justify-center rounded-md border border-border bg-card px-8 text-sm font-medium shadow-sm transition-all duration-200 hover:bg-muted hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-foreground"
             >
-              {copied ? (
+              {copyState === "copied" ? (
                 <><CheckCircle2 className="mr-2 h-4 w-4 text-emerald-500" /> Copied!</>
+              ) : copyState === "failed" ? (
+                <><AlertCircle className="mr-2 h-4 w-4 text-amber-500" /> Copy failed</>
               ) : (
                 <><Copy className="mr-2 h-4 w-4" /> Copy Email</>
               )}
             </button>
           </div>
+          {copyState === "failed" && (
+            <p role="status" aria-live="polite" className="text-sm text-muted-foreground mb-6">
+              Copying is not available. Select this address instead: <span className="select-all">{portfolioData.personal.email}</span>
+            </p>
+          )}
 
           <div className="flex justify-center gap-4">
             <a

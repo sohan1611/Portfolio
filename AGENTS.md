@@ -154,10 +154,12 @@ file:line so they can be confirmed before work starts. Confirm, then implement, 
 
 ### Correctness / robustness
 
-- [ ] **Clipboard write has no failure path.** `src/components/sections/Contact.tsx:14` calls
-      `navigator.clipboard.writeText(...)` then unconditionally shows "Copied!". On a
-      non-secure context or when permission is denied it lies to the user. Await it, catch,
-      and show a failure state.
+- [x] **Clipboard write has no failure path.** Done 2026-08-06. The handler is now `async`,
+      guards `navigator.clipboard?.writeText` (undefined on a non-secure context, where the
+      old code threw a TypeError), awaits the write, and drives a three-state
+      `idle | copied | failed` button. On failure the address is rendered as selectable text
+      in an `aria-live` region, so the user still gets what they came for. The reset timer is
+      held in a ref, cleared between clicks and on unmount — the old one leaked.
 
 - [ ] **Repo card descriptions can be clipped.** `GitHubActivity.tsx` uses `line-clamp-2`
       together with a fixed `h-10` on the description paragraph. Longer GitHub descriptions

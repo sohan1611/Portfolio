@@ -61,3 +61,24 @@ to a 200 `image/png`, `twitter:card` is `summary_large_image`, and the shipped C
   (640w–3840w) capped by `sizes` at 1024px. Measured off a production build: 487,381 B JPEG →
   46,554 B AVIF at 1080w, 33,695 B at 750w, 60,874 B WebP fallback. Download link still
   returns the original 487,381 B JPEG.
+- Deployed as `365ed9d`, Vercel `dpl_AXabMRP` READY. Confirmed on https://sohan16.com:
+  487,381 B JPEG → 42,758 B AVIF at 1080w, 25,792 B at 750w, 60,874 B WebP fallback.
+- Note for future verification: polling the live domain in a tight `curl` loop tripped Vercel's
+  bot mitigation (`X-Vercel-Mitigated: challenge`, HTTP 403 to that client). Real browsers were
+  unaffected and no project setting was changed. Measure production through the browser, or
+  poll the Vercel deployments API instead of hammering the domain.
+
+## 2026-08-06 — Work order 4 (Claude → Codex): clipboard failure path
+
+- Task: stop `Contact.tsx` claiming "Copied!" when the write never happened. Async handler,
+  optional-chaining guard for the non-secure-context case, three-state button, and — because
+  the point of the button is that someone walks away with the address — show the email as
+  selectable text in an `aria-live` region when it fails. Every region quoted verbatim in the
+  spec after last round's anchoring failure.
+- Codex: landed in one round, matching the spec.
+- Review: one cosmetic fix applied directly by Claude rather than spending a round trip — the
+  failure paragraph had no bottom margin, leaving the social links cramped against it
+  (`mb-6` added). Verified — lint silent, build green, and all three paths exercised in a
+  production build: resolved write shows "Copied!" and writes the right address with no
+  fallback; a rejected promise and a wholly undefined `navigator.clipboard` both show
+  "Copy failed" plus the selectable address, with zero uncaught errors.
