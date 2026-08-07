@@ -205,13 +205,20 @@ has an accessible name, no horizontal overflow at 375px, all 15 `target="_blank"
 are 20px tall but **pass** 2.5.8 via the spacing exception (`gap-6` = 24px between targets) —
 do not "fix" them.
 
-### Deliberately deferred — decisions, not oversights
+### Settled decisions — do not re-raise
 
-- [ ] **Full Content-Security-Policy.** Only `frame-ancestors` is set. A real `script-src`
-      needs a nonce for Next's inline bootstrap and the JSON-LD block; supplying one requires
-      middleware, and middleware makes the route dynamic — it is currently statically
-      prerendered with `revalidate: 3600` (§3). Not worth that trade for a static portfolio,
-      but it is a live option if the site ever gains a backend.
+- **Full Content-Security-Policy: deliberately not implemented.** Decided by the owner
+  2026-08-06. Only `frame-ancestors 'self'` is set, and that is the intended end state.
+
+  A real `script-src` needs a nonce for Next's inline bootstrap and for the JSON-LD block.
+  Supplying a nonce requires middleware, and middleware makes the route dynamic — `/` is
+  currently statically prerendered with `revalidate: 3600` (§3). That is a concrete cost for
+  no concrete gain here: the site has no user input, no auth, no forms and no third-party
+  scripts, so the injection surface a `script-src` defends is empty. `frame-ancestors`
+  already covers the clickjacking case that does apply.
+
+  Revisit only if the site gains a backend, accepts user input, or loads third-party scripts.
+  Until one of those is true, do not propose this again.
 
 - [x] **Three high-severity npm advisories.** Done 2026-08-06. `next` and `eslint-config-next`
       moved 16.2.7 → 16.3.0 together (they version in lockstep); `package.json` changed those
