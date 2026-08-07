@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Award, Eye, Download, X, Clock } from "lucide-react";
@@ -12,6 +13,8 @@ interface Certificate {
   issuer: string;
   status: string;
   certificateFile: string | null;
+  certificateWidth?: number;
+  certificateHeight?: number;
   showViewButton: boolean;
   showDownloadButton: boolean;
 }
@@ -65,7 +68,12 @@ export function Achievements() {
     };
   }, [selectedCert]);
 
-  const renderCertificateViewer = (fileUrl: string, title: string) => {
+  const renderCertificateViewer = (
+    fileUrl: string,
+    title: string,
+    width?: number,
+    height?: number,
+  ) => {
     const isPdf = fileUrl.toLowerCase().endsWith(".pdf");
     if (isPdf) {
       return (
@@ -76,11 +84,14 @@ export function Achievements() {
         />
       );
     }
+    // Image certificates should carry their real dimensions in portfolio.ts.
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={fileUrl}
         alt={`${title} Certificate`}
+        width={width ?? 3509}
+        height={height ?? 2712}
+        sizes="(max-width: 1024px) 100vw, 1024px"
         className="w-full h-auto max-h-[75vh] object-contain rounded-md"
       />
     );
@@ -178,7 +189,12 @@ export function Achievements() {
             </div>
             
             <div className="w-full bg-muted/50 rounded-lg overflow-hidden flex items-center justify-center">
-              {renderCertificateViewer(selectedCert.certificateFile, selectedCert.title)}
+              {renderCertificateViewer(
+                selectedCert.certificateFile,
+                selectedCert.title,
+                selectedCert.certificateWidth,
+                selectedCert.certificateHeight,
+              )}
             </div>
           </div>
         </div>,

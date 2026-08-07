@@ -120,6 +120,8 @@ export const portfolioData = {
       issuer: "E&ICT Academy, IIT Roorkee",
       status: "Completed",
       certificateFile: "/certificates/eict-iitr-ml-agentic-ai-certificate.jpg",
+      certificateWidth: 3509,
+      certificateHeight: 2712,
       showViewButton: true,
       showDownloadButton: true,
     },

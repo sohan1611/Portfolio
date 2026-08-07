@@ -140,9 +140,17 @@ file:line so they can be confirmed before work starts. Confirm, then implement, 
       the opacity crossfade. No blanket `!important` motion reset — it would have killed the
       intentional hover lift and could not fix Reveal's `opacity: 0` initial state anyway.
 
-- [ ] **Certificate image is 476KB, unoptimised.** `public/certificates/eict-iitr-ml-agentic-ai-certificate.jpg`
-      is served through a raw `<img>` in `Achievements.tsx:81` with an `eslint-disable` for
-      `no-img-element`. Convert to `next/image` (removing the disable) or compress the asset.
+- [x] **Certificate image is 476KB, unoptimised.** Done 2026-08-06. Now served through
+      `next/image`; the `eslint-disable` is gone. Intrinsic dimensions (3509×2712) live in
+      `portfolio.ts` alongside the file, per §3.
+
+      Two corrections to how this item was originally framed. The `<img>` only ever mounted
+      inside the certificate modal, so the weight was never on the initial page load — this
+      was a bandwidth-on-open problem, not an LCP one. And **compressing the asset would have
+      been the wrong fix**: the Download Certificate link serves the same path, and a
+      downloadable certificate should stay full resolution. `next/image` gives an optimized
+      derivative for viewing while the original is preserved for download. Measured against a
+      production build: 487KB JPEG → 46KB AVIF at 1080w, 34KB at 750w.
 
 ### Correctness / robustness
 

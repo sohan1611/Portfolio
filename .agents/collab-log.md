@@ -37,3 +37,27 @@ bottom. Gists only — no transcripts, never any secrets.
   compositing, so IntersectionObserver delivered zero callbacks (confirmed directly) and no
   Reveal ever transitioned. That path is code-reviewed, not runtime-verified — worth a manual
   look with the OS setting toggled.
+
+## 2026-08-06 — Deploy
+
+Both work orders pushed to `main` as `907f3e2` and `b277adb`. Vercel production deploy
+`dpl_DVwyJNG` READY. Verified on https://sohan16.com — `og:image` and `twitter:image` resolve
+to a 200 `image/png`, `twitter:card` is `summary_large_image`, and the shipped CSS contains the
+`prefers-reduced-motion:reduce` override.
+
+## 2026-08-06 — Work order 3 (Claude → Codex): certificate image through next/image
+
+- Task: replace the raw `<img>` in the certificate modal with `next/image` and drop the
+  `@next/next/no-img-element` disable, with intrinsic dimensions added to `portfolio.ts`.
+  The spec explicitly ruled out compressing the source JPEG: the Download Certificate link
+  serves the same path, so the original must stay full resolution.
+- Codex: round 1 applied **nothing** — it assumed the interface contained
+  `certificateFile?: string`, tried to anchor a patch on that line, and failed. The real
+  declaration is `certificateFile: string | null`, and the work order had never quoted it.
+- Review: correction sent quoting all four regions verbatim, with the instruction to read the
+  file rather than guess at its contents.
+- Round 2: landed exactly as specced. Verified by Claude — lint silent, build green, modal
+  opens and renders through `/_next/image` with `loading="lazy"` and the full srcset ladder
+  (640w–3840w) capped by `sizes` at 1024px. Measured off a production build: 487,381 B JPEG →
+  46,554 B AVIF at 1080w, 33,695 B at 750w, 60,874 B WebP fallback. Download link still
+  returns the original 487,381 B JPEG.
