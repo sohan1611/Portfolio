@@ -166,15 +166,69 @@ file:line so they can be confirmed before work starts. Confirm, then implement, 
       are cut without any affordance. Either drop the fixed height or accept the truncation
       deliberately with a `title` attribute.
 
+### Accessibility and security — pass completed 2026-08-06
+
+Both areas had never been examined. They have now been, against a production build.
+
+- [x] **No mobile navigation existed at all.** At 375px the header rendered one usable control
+      (the name link); all 7 nav links were `display:none`, there were zero buttons, and the
+      only affordance was the text "Press /" — a keyboard hint on a device with no keyboard.
+      Replaced with a hamburger drawer: `role="dialog"`, `aria-modal`, accessible name,
+      44px targets, focus trap covering the toggle *and* the links, focus restored to the
+      toggle on close, Escape / backdrop / link-tap all close, body scroll locked. No Framer
+      Motion and no animation — a plain conditional render sidesteps reduced motion entirely.
+
+- [x] **No skip link** — WCAG 2.4.1 Bypass Blocks, Level A. Added as the first element in
+      `<body>`, targeting `#main-content` on the `<main>` in `page.tsx`.
+
+- [x] **Footer social links were 20×20** — now 44×44 (WCAG 2.5.8).
+
+- [x] **Navbar had no focus styling whatsoever.** Now uses the same
+      `focus-visible:ring-1 focus-visible:ring-ring` idiom as the rest of the codebase.
+
+- [x] **Dead light-mode classes in the Navbar** (`text-slate-900/85 dark:...`) removed, per
+      the dark-only rule in §4.
+
+- [x] **No security headers.** `next.config.ts` now sends `X-Content-Type-Options`,
+      `Referrer-Policy`, `Permissions-Policy`, `Content-Security-Policy: frame-ancestors
+      'self'` and `Strict-Transport-Security`. Verified served, and `/` stays statically
+      prerendered.
+
+- [x] **JSON-LD was injected unescaped.** `layout.tsx` now escapes `<` to `\u003c`, so no
+      value reachable from `portfolio.ts` can terminate the `<script>` tag. Not exploitable
+      before (all content is owner-authored) — this is hardening.
+
+**Verified clean, so don't re-audit these:** all 27 distinct text styles pass AA contrast
+(worst 7.02:1), one `h1` with no skipped levels across 52 headings, every interactive control
+has an accessible name, no horizontal overflow at 375px, all 15 `target="_blank"` links carry
+`rel="noopener noreferrer"`, no secrets, no `eval`, no user input anywhere. Desktop nav links
+are 20px tall but **pass** 2.5.8 via the spacing exception (`gap-6` = 24px between targets) —
+do not "fix" them.
+
+### Deliberately deferred — decisions, not oversights
+
+- [ ] **Full Content-Security-Policy.** Only `frame-ancestors` is set. A real `script-src`
+      needs a nonce for Next's inline bootstrap and the JSON-LD block; supplying one requires
+      middleware, and middleware makes the route dynamic — it is currently statically
+      prerendered with `revalidate: 3600` (§3). Not worth that trade for a static portfolio,
+      but it is a live option if the site ever gains a backend.
+
+- [ ] **Three high-severity npm advisories** — `postcss` (×3) and `sharp`/libvips, both
+      transitive under `next@16.2.7`; `next@16.3.0` clears them. sharp matters more now that
+      the certificate image goes through the optimizer. Left for the owner: §1 says
+      dependency bumps are done by hand. Do not run `npm audit fix`.
+
+### Correctness / robustness (cont.)
+
+- [ ] **Repo card descriptions can be clipped.** `GitHubActivity.tsx` uses `line-clamp-2`
+      together with a fixed `h-10` on the description paragraph. Longer GitHub descriptions
+      are cut without any affordance. Either drop the fixed height or accept the truncation
+      deliberately with a `title` attribute. Note this is a judgement call about intended
+      behaviour, not a defect — decide which you want before speccing it.
+
 ### Housekeeping
 
-- [ ] **Stray lockfile breaks workspace-root inference.** A `package-lock.json` sits at
-      `C:\Users\KIIT\` (outside the project), so every build prints a warning and Next infers
-      the wrong root. Delete that stray file, or set `turbopack.root` in `next.config.ts`.
-
-### Not yet triaged
-
-A six-lens audit (correctness, a11y, SEO, perf, responsive, security) was started and
-**cancelled before producing results**. The items above come from direct code reading, not
-from that audit — accessibility and security in particular have had no systematic pass yet.
-Treat those two areas as unexamined.
+- [x] **Stray lockfile breaks workspace-root inference.** Stale — this described a
+      `package-lock.json` at `C:\Users\KIIT\` on a previous machine. Verified 2026-08-06 on
+      the current machine: nothing above the project root, and the build emits no
+      root-inference warning. Re-check if the warning ever reappears elsewhere.

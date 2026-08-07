@@ -82,3 +82,34 @@ to a 200 `image/png`, `twitter:card` is `summary_large_image`, and the shipped C
   production build: resolved write shows "Copied!" and writes the right address with no
   fallback; a rejected promise and a wholly undefined `navigator.clipboard` both show
   "Copy failed" plus the selectable address, with zero uncaught errors.
+
+## 2026-08-06 — Accessibility and security pass (Claude audit → work orders 5 and 6)
+
+- Audit by Claude against a production build, not by reading alone. Headline finding: at 375px
+  the header exposed one usable control and no navigation at all — 7 links `display:none`,
+  zero buttons, and "Press /" as the only hint. Also no skip link (WCAG 2.4.1, Level A), the
+  command palette missing dialog semantics, 20×20 footer targets, and no focus styling in the
+  Navbar. Security: no headers at all, and JSON-LD injected via `dangerouslySetInnerHTML`
+  without escaping `<`.
+- Owner chose a hamburger drawer over reusing the command palette for mobile nav.
+- **WO5 (Claude → Codex):** drawer + skip link + focus styles + 44px footer targets +
+  light-mode class removal. Codex landed it in one round. Review found one real defect: the
+  focus trap collected focusables from the drawer only, so the visible "Close menu" button sat
+  outside the cycle and was unreachable by keyboard (Escape still worked). Correction sent;
+  round 2 fixed it.
+- **WO6 (Claude → Codex):** security headers + JSON-LD escaping. One round, exactly as specced.
+- Verified by Claude: lint silent, build green, `/` still statically prerendered with the 1h
+  revalidate. At 375px — toggle 44×44, `role="dialog"` + `aria-modal` + accessible name, 7
+  links ≥44px, focus into the drawer on open, Escape and backdrop both close and restore focus,
+  scroll locks and unlocks, and after the fix Tab from the last link wraps to the toggle. At
+  1280px the inline nav is back and the toggle is gone. Skip link is the first focusable and
+  its target resolves. All five headers served; the same-origin resume PDF iframe still loads
+  under `frame-ancestors 'self'`.
+- Two verification notes worth keeping. First, checking the live JSON-LD only proved the
+  current data is clean — it contains no `<` at all — so the escape was proven separately
+  against a hostile `</script><img onerror=...>` payload: `</script>` gone, no raw `<`, value
+  round-trips identically. Second, that test initially reported a false failure because shell
+  quoting mangled the replacement string; running it from a file gave the true result. Prefer
+  a file over `node -e` for anything containing backslashes.
+- Deferred by decision, recorded in AGENTS.md: full CSP (needs a nonce → middleware → dynamic
+  route) and the three npm advisories (owner does dependency bumps by hand).

@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <Navbar />
       <CommandPalette />
-      <main className="flex min-h-screen flex-col items-center">
+      <main id="main-content" className="flex min-h-screen flex-col items-center">
         <Hero />
         <Highlights />
         <About />
