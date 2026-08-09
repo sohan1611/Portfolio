@@ -258,6 +258,19 @@ driving a production build, not by reading alone.
   Revisit only if the site gains a backend, accepts user input, or loads third-party scripts.
   Until one of those is true, do not propose this again.
 
+- **Brand colour on the Technical Arsenal marks is a deliberate, scoped exception to §4.**
+  Chosen by the owner 2026-08-09. Marks are muted at rest and take their brand colour only on
+  `group-hover`, via a `--brand` custom property set per chip in `Skills.tsx` and consumed by
+  `group-hover:text-[var(--brand)]`.
+
+  Two things not to "simplify": (1) the colour **must** come through a CSS custom property —
+  interpolating the hex into a class name (`group-hover:text-[${hex}]`) produces classes
+  Tailwind's static scanner never sees, so the colours would silently never render. (2) Ten
+  brands are black or near-black (Vercel, Next.js, Render, Resend, GitHub, Railway, Java,
+  Express, Prisma, OpenAI — all under 1.6:1 against `#0B0F14`) and are deliberately mapped to
+  `var(--foreground)` instead. That is not a fudge: each of those ships a white mark as its
+  official dark-background variant. Do not "restore" their real hex; they would vanish.
+
 - **`react-icons` is pinned to exactly `5.6.0`. Do not bump it without checking `SiOpenai`.**
   The Technical Arsenal chips take their brand marks from `react-icons/si` (Simple Icons).
   **`5.7.0` removes `SiOpenai`** — Simple Icons drops marks on trademark request — and the

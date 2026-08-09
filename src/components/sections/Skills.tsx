@@ -46,39 +46,41 @@ const SiNeonLocal: IconType = (props) => (
   </svg>
 );
 
-const SKILL_ICONS: Record<string, IconType> = {
-  "Python": SiPython,
-  "TypeScript": SiTypescript,
-  "JavaScript": SiJavascript,
-  "Java": SiOpenjdk,
-  "C": SiC,
-  "Next.js": SiNextdotjs,
-  "React": SiReact,
-  "FastAPI": SiFastapi,
-  "Express.js": SiExpress,
-  "Tailwind CSS": SiTailwindcss,
-  "PostgreSQL": SiPostgresql,
-  "Supabase": SiSupabase,
-  "Neon": SiNeonLocal,
-  "Redis": SiRedis,
-  "Prisma ORM": SiPrisma,
-  "SQLAlchemy": SiSqlalchemy,
-  "OpenAI API": SiOpenai,
-  "Gemini API": SiGooglegemini,
-  "Google OAuth": SiGoogle,
-  "Resend": SiResend,
-  "Vercel": SiVercel,
-  "Render": SiRender,
-  "Railway": SiRailway,
-  "Cloudflare": SiCloudflare,
-  "Google Cloud Run": SiGooglecloud,
-  "Upstash": SiUpstash,
-  "Git": SiGit,
-  "GitHub": SiGithub,
-  "GitHub Actions": SiGithubactions,
-  "Docker": SiDocker,
-  "Claude Code": SiClaude,
-  "OpenAI Codex": SiOpenai,
+const FG = "var(--foreground)";
+
+const SKILL_MARKS: Record<string, { icon: IconType; colour: string }> = {
+  "Python": { icon: SiPython, colour: "#3776AB" },
+  "Next.js": { icon: SiNextdotjs, colour: FG },
+  "TypeScript": { icon: SiTypescript, colour: "#3178C6" },
+  "React": { icon: SiReact, colour: "#61DAFB" },
+  "JavaScript": { icon: SiJavascript, colour: "#F7DF1E" },
+  "FastAPI": { icon: SiFastapi, colour: "#009688" },
+  "Java": { icon: SiOpenjdk, colour: FG },
+  "Express.js": { icon: SiExpress, colour: FG },
+  "C": { icon: SiC, colour: "#A8B9CC" },
+  "Tailwind CSS": { icon: SiTailwindcss, colour: "#06B6D4" },
+  "PostgreSQL": { icon: SiPostgresql, colour: "#4169E1" },
+  "Supabase": { icon: SiSupabase, colour: "#3FCF8E" },
+  "Neon": { icon: SiNeonLocal, colour: "#34D59A" },
+  "Redis": { icon: SiRedis, colour: "#FF4438" },
+  "Prisma ORM": { icon: SiPrisma, colour: FG },
+  "SQLAlchemy": { icon: SiSqlalchemy, colour: "#D71F00" },
+  "OpenAI API": { icon: SiOpenai, colour: FG },
+  "Gemini API": { icon: SiGooglegemini, colour: "#8E75B2" },
+  "Google OAuth": { icon: SiGoogle, colour: "#4285F4" },
+  "Resend": { icon: SiResend, colour: FG },
+  "Vercel": { icon: SiVercel, colour: FG },
+  "Render": { icon: SiRender, colour: FG },
+  "Railway": { icon: SiRailway, colour: FG },
+  "Cloudflare": { icon: SiCloudflare, colour: "#F38020" },
+  "Google Cloud Run": { icon: SiGooglecloud, colour: "#4285F4" },
+  "Upstash": { icon: SiUpstash, colour: "#00E9A3" },
+  "Git": { icon: SiGit, colour: "#F03C2E" },
+  "GitHub": { icon: SiGithub, colour: FG },
+  "GitHub Actions": { icon: SiGithubactions, colour: "#2088FF" },
+  "Docker": { icon: SiDocker, colour: "#2496ED" },
+  "Claude Code": { icon: SiClaude, colour: "#D97757" },
+  "OpenAI Codex": { icon: SiOpenai, colour: FG },
 };
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
@@ -92,14 +94,16 @@ function SkillCard({ title, items, icon: Icon }: { title: string, items: string[
       </div>
       <ul className="flex flex-wrap gap-3">
         {items.map((item) => {
-          const SkillIcon = SKILL_ICONS[item];
+          const mark = SKILL_MARKS[item];
+          const { icon: SkillIcon, colour } = mark ?? {};
 
           return (
             <li
               key={item}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/40 border border-border/40 text-xs font-display font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/40 border border-border/40 text-xs font-display font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+              style={mark ? ({ "--brand": colour } as React.CSSProperties) : undefined}
             >
-              {SkillIcon && <SkillIcon aria-hidden className="h-3.5 w-3.5 shrink-0" />}
+              {SkillIcon && <SkillIcon aria-hidden className="h-3.5 w-3.5 shrink-0 transition-colors group-hover:text-[var(--brand)]" />}
               {item}
             </li>
           );

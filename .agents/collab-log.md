@@ -215,3 +215,22 @@ Codex switched to GPT-5.6-Terra at `ultra` for both.
 - Verified: lint silent, build exit 0, `/` static. 49 chips, 32 with marks, icons 14×14
   inheriting the chip colour and `aria-hidden` so nothing is announced twice; both OpenAI
   chips have marks; Neon and pgvector text-only; `grep Antigravity src/` returns nothing.
+
+## 2026-08-09 — Work order 13 (Claude → Codex): brand colour on hover
+
+- Owner asked why the marks were monochrome. The answer had a hard component, not just taste:
+  measured against `#0B0F14`, ten brand colours fall below 1.6:1 contrast — Vercel, Next.js,
+  Render, Resend (#000000), Railway (#0B0D0E), GitHub (#181717), Java, Express, Prisma, and
+  OpenAI. Straight brand colours would have made a third of the marks invisible.
+- Owner chose: monochrome at rest, brand colour on hover. The ten dark brands map to
+  `var(--foreground)`, which is what those companies themselves ship as their dark-background
+  variant.
+- Implemented as a `--brand` custom property per chip plus `group-hover:text-[var(--brand)]`.
+  The spec explicitly forbade interpolating the hex into the class name — Tailwind scans
+  statically and would have generated nothing, failing silently with no error anywhere.
+- Verified on a production build: Tailwind emitted
+  `.group-hover\:text-\[var\(--brand\)\]:is(:where(.group):hover *) { color: var(--brand) }`
+  inside `@media (hover: hover)`, so touch devices get no stuck colour. All 32 marks share one
+  colour at rest (the muted tone); `--brand` resolves to `#F38020` on Cloudflare, `#34D59A` on
+  Neon, `#D97757` on Claude Code, `#dae2fd` on Vercel/GitHub/OpenAI Codex; SQL and pgvector
+  carry no `--brand` at all. Lint silent, build exit 0.
