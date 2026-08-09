@@ -14,14 +14,19 @@ export function ViewResumeButton({ className = "", label = "View Resume" }: View
   const [isOpen, setIsOpen] = React.useState(false);
   const modalRef = React.useRef<HTMLDivElement>(null);
   const closeBtnRef = React.useRef<HTMLButtonElement>(null);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
 
   const resumeUrl = portfolioData.personal.resumeUrl;
+  const closeModal = React.useCallback(() => {
+    setIsOpen(false);
+    triggerRef.current?.focus();
+  }, []);
 
   // Close on Escape and trap focus while the modal is open
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsOpen(false);
+        closeModal();
       }
 
       if (e.key === "Tab" && modalRef.current) {
@@ -57,14 +62,15 @@ export function ViewResumeButton({ className = "", label = "View Resume" }: View
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, closeModal]);
 
   return (
     <>
       <button
+        ref={triggerRef}
+        type="button"
         onClick={() => setIsOpen(true)}
         className={className}
-        aria-label="View resume"
       >
         <Eye className="mr-2 h-4 w-4" /> {label}
       </button>
@@ -75,10 +81,12 @@ export function ViewResumeButton({ className = "", label = "View Resume" }: View
           role="dialog"
           aria-modal="true"
           aria-labelledby="resume-modal-title"
+          onClick={closeModal}
         >
           <div
             ref={modalRef}
             className="relative bg-card border border-border p-4 md:p-6 rounded-xl shadow-xl w-full max-w-5xl flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
               <h2 id="resume-modal-title" className="text-lg font-semibold text-foreground">
@@ -86,7 +94,7 @@ export function ViewResumeButton({ className = "", label = "View Resume" }: View
               </h2>
               <button
                 ref={closeBtnRef}
-                onClick={() => setIsOpen(false)}
+                onClick={closeModal}
                 className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Close resume viewer"
               >

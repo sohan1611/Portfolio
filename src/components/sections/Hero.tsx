@@ -43,12 +43,12 @@ export function Hero() {
         </Reveal>
         
         <Reveal delay={200} once={true}>
-          <div className="flex items-center gap-4 pt-6 text-muted-foreground">
-            <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+          <div className="flex items-center gap-1 pt-6 text-muted-foreground">
+            <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
               <FaGithub className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </a>
-            <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+            <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
               <FaLinkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </a>

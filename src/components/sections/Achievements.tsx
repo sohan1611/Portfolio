@@ -4,7 +4,7 @@ import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Award, Eye, Download, X, Clock } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Reveal } from "../ui/Reveal";
 
@@ -23,12 +23,17 @@ export function Achievements() {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const closeModal = useCallback(() => {
+    setSelectedCert(null);
+    triggerRef.current?.focus();
+  }, []);
 
   // Close modal on Escape key and trap focus
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setSelectedCert(null);
+        closeModal();
       }
       
       // Simple focus trap
@@ -66,7 +71,7 @@ export function Achievements() {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [selectedCert]);
+  }, [selectedCert, closeModal]);
 
   const renderCertificateViewer = (
     fileUrl: string,
@@ -137,7 +142,11 @@ export function Achievements() {
               {item.status === "Completed" && item.showViewButton && (
                 <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                   <button
-                    onClick={() => setSelectedCert(item as Certificate)}
+                    type="button"
+                    onClick={(event) => {
+                      triggerRef.current = event.currentTarget;
+                      setSelectedCert(item as Certificate);
+                    }}
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-display font-medium text-primary-foreground transition-all duration-200 hover:bg-primary/90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label={`View ${item.title} certificate`}
                   >
@@ -169,10 +178,12 @@ export function Achievements() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
+          onClick={closeModal}
         >
           <div 
             ref={modalRef}
             className="relative bg-card border border-border p-4 md:p-6 rounded-xl shadow-xl w-full max-w-5xl flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
               <h2 id="modal-title" className="text-lg font-semibold text-foreground">
@@ -180,7 +191,7 @@ export function Achievements() {
               </h2>
               <button
                 ref={closeBtnRef}
-                onClick={() => setSelectedCert(null)}
+                onClick={closeModal}
                 className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Close modal"
               >

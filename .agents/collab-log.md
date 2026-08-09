@@ -156,3 +156,30 @@ machine. Done by hand per §1 — no bot, no automation.
   headers intact; optimizer and OG image byte-identical to pre-upgrade (46,554 B / 38,263 B);
   drawer, skip link, clipboard failure path and repo descriptions all still behave; zero
   uncaught errors.
+
+## 2026-08-06 — Work orders 8 & 9 (Claude → Codex): second audit
+
+Codex switched to GPT-5.6-Terra at `ultra` for both.
+
+- Audit first, by Claude, over the components the first pass never read — driving a production
+  build rather than reading alone. Four confirmed defects: neither modal restored focus on
+  close (activeElement became BODY), a Label-in-Name violation on `ViewResumeButton`, seven
+  Projects links exposing only "Source Code"/"Live Demo", and 20×20 Hero social targets with a
+  16px gap.
+- One hypothesis was **wrong and dropped**: anchor jumps do put section tops behind the 65px
+  fixed header, but section padding means headings still clear it (~46px desktop, 13px
+  mobile). Recorded as polish, not the content-loss bug it looked like. Worth noting that
+  reading alone would have shipped it as a defect.
+- WO8 (modal focus + Label in Name) and WO9 (link names, targets, `scroll-mt-20`, 404 title):
+  both landed in one round each.
+- **Claude's error, two rounds to unwind.** WO9's 404 metadata produced two robots meta tags,
+  so a correction was sent to drop the explicit `robots` key. That was wrong: without it the
+  route inherits `index: true` from the root layout, and the served 404 then carried
+  `noindex` and `index, follow` together — worse than the duplicate. Measured, reverted, and
+  written into AGENTS.md as a trap so it is not "tidied" again.
+- Verified after: lint silent, build green, `/` static; focus restored on all three close
+  paths for both modals including from the second certificate trigger; 7 unique project link
+  names all containing their visible text; Hero socials 44×44; `scroll-margin-top` 80px;
+  404 returns HTTP 404 with consistent noindex and the homepage still `index, follow`; drawer,
+  skip link, clipboard and repo descriptions all unregressed; zero unnamed controls; zero
+  uncaught errors.

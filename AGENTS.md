@@ -205,6 +205,44 @@ has an accessible name, no horizontal overflow at 375px, all 15 `target="_blank"
 are 20px tall but **pass** 2.5.8 via the spacing exception (`gap-6` = 24px between targets) —
 do not "fix" them.
 
+### Second audit — completed 2026-08-06
+
+A deeper pass over the components the first audit did not read. All findings were confirmed by
+driving a production build, not by reading alone.
+
+- [x] **Neither modal restored focus on close.** Confirmed by measurement: focus a trigger,
+      open `ViewResumeButton` or the `Achievements` certificate modal, press Escape, and
+      `document.activeElement` became `BODY` — a keyboard user lost their place entirely
+      (WCAG 2.4.3). Both now restore focus to the exact element that opened them, on all
+      three close paths. `Achievements` captures the trigger via `event.currentTarget`, so
+      opening the *second* certificate returns focus to the second button, not the first —
+      verified.
+
+- [x] **Label in Name violation** (WCAG 2.5.3, Level A). `ViewResumeButton` hardcoded
+      `aria-label="View resume"` while rendering `{label}`. In Contact the visible text is
+      "View Full PDF Resume" but the accessible name was "View resume", so voice-control users
+      saying what they could see could not activate it. The hardcoded label is gone; the
+      visible text now names the button.
+
+- [x] **Both modals now close on backdrop click**, matching the Navbar drawer. Clicking inside
+      the panel does not close — verified.
+
+- [x] **Repeated link names gave no way to choose.** The Projects section exposed
+      "Source Code" ×4 and "Live Demo" ×3 (WCAG 2.4.4). Now 7 unique names of the form
+      "Source Code for Aspirova", each still containing its visible text so 2.5.3 holds.
+
+- [x] **Hero social links were 20×20 with a 16px gap** — under 2.5.8's 24px minimum, and the
+      spacing exception did not rescue them. Now 44×44 with focus rings, matching the Footer.
+
+- [x] **Anchor jumps landed section tops behind the fixed header.** `scroll-margin-top` was
+      `0px` everywhere against a 65px fixed header. `Section` now carries `scroll-mt-20`;
+      sections land 15px clear of the header instead of 65px behind it. Note the headings
+      were never actually hidden — section padding absorbed it — so this is polish, not a
+      content-loss bug.
+
+- [x] **The 404 inherited the portfolio's title.** Now "Page Not Found | Sohan Mandal" with
+      its own description, still returning HTTP 404.
+
 ### Settled decisions — do not re-raise
 
 - **Full Content-Security-Policy: deliberately not implemented.** Decided by the owner
@@ -219,6 +257,14 @@ do not "fix" them.
 
   Revisit only if the site gains a backend, accepts user input, or loads third-party scripts.
   Until one of those is true, do not propose this again.
+
+- **The 404 serves two `robots` meta tags on purpose. Do not "tidy" it.** Next emits its own
+  `<meta name="robots" content="noindex"/>` for the not-found route, and `not-found.tsx` also
+  sets `robots: { index: false, follow: true }`, so the HTML carries two tags that both say
+  noindex. Removing the explicit key looks like a cleanup and is actively harmful: the route
+  then **inherits** `robots: { index: true, follow: true }` from the root layout, and the 404
+  ends up serving `noindex` and `index, follow` together. Tried it 2026-08-06, measured the
+  contradiction, reverted. Two agreeing tags beat two contradicting ones.
 
 - [x] **Three high-severity npm advisories.** Done 2026-08-06. `next` and `eslint-config-next`
       moved 16.2.7 → 16.3.0 together (they version in lockstep); `package.json` changed those

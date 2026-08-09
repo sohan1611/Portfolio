@@ -83,6 +83,7 @@ export function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Source Code for ${project.title}`}
                       className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
                     >
                       <FaGithub className="mr-2 h-4 w-4" />
@@ -94,6 +95,7 @@ export function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Live Demo for ${project.title}`}
                       className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
