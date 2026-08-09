@@ -258,6 +258,16 @@ driving a production build, not by reading alone.
   Revisit only if the site gains a backend, accepts user input, or loads third-party scripts.
   Until one of those is true, do not propose this again.
 
+- **`react-icons` is pinned to exactly `5.6.0`. Do not bump it without checking `SiOpenai`.**
+  The Technical Arsenal chips take their brand marks from `react-icons/si` (Simple Icons).
+  **`5.7.0` removes `SiOpenai`** — Simple Icons drops marks on trademark request — and the
+  build fails outright with `Export SiOpenai doesn't exist in target module`. That same release
+  adds `SiNeon`, so the two are mutually exclusive: 5.6.0 gives OpenAI (used by the "OpenAI
+  API" and "OpenAI Codex" chips) and no Neon; 5.7.0 gives Neon and no OpenAI. Two chips beat
+  one, so we stay on 5.6.0 and "Neon" renders text-only. Tried the bump 2026-08-09, broke the
+  build, reverted. The version is pinned without a caret precisely so `npm install` cannot
+  pull 5.7.0 silently.
+
 - **The 404 serves two `robots` meta tags on purpose. Do not "tidy" it.** Next emits its own
   `<meta name="robots" content="noindex"/>` for the not-found route, and `not-found.tsx` also
   sets `robots: { index: false, follow: true }`, so the HTML carries two tags that both say

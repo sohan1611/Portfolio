@@ -32,12 +32,12 @@ export const portfolioData = {
   skills: {
     programmingLanguages: ["Python", "TypeScript", "JavaScript", "Java", "C", "SQL"],
     frameworks: ["Next.js", "React", "FastAPI", "Express.js", "Tailwind CSS"],
-    databases: ["PostgreSQL", "Supabase", "pgvector", "Redis", "Prisma ORM", "SQLAlchemy"],
-    ai: ["OpenAI API", "Gemini API", "Serper API", "Resend", "Vector Embeddings", "Semantic Search"],
-    auth: ["Google OAuth"],
-    cloud: ["Vercel", "Railway", "Google Cloud Run", "Upstash"],
-    tools: ["Git", "GitHub", "GitHub Actions", "Docker", "Antigravity"],
-    aiDev: ["Antigravity", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
+    databases: ["PostgreSQL", "Supabase", "Neon", "pgvector", "Redis", "Prisma ORM", "SQLAlchemy"],
+    ai: ["OpenAI API", "Gemini API", "Serper API", "Vector Embeddings", "Semantic Search"],
+    auth: ["Google OAuth", "Resend"],
+    cloud: ["Vercel", "Render", "Railway", "Cloudflare", "Google Cloud Run", "Upstash"],
+    tools: ["Git", "GitHub", "GitHub Actions", "Docker"],
+    aiDev: ["Claude Code", "OpenAI Codex", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "AI-Assisted Full Stack Development"],
     currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "AI-Assisted Full Stack Development"]
   },

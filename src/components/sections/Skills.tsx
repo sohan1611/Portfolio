@@ -5,6 +5,73 @@ import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
 import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench, Bot } from "lucide-react";
 import React from "react";
+import type { IconType } from "react-icons";
+import {
+  SiC,
+  SiClaude,
+  SiCloudflare,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiGit,
+  SiGithub,
+  SiGithubactions,
+  SiGoogle,
+  SiGooglecloud,
+  SiGooglegemini,
+  SiJavascript,
+  SiNextdotjs,
+  SiOpenai,
+  SiOpenjdk,
+  SiPostgresql,
+  SiPrisma,
+  SiPython,
+  SiRailway,
+  SiReact,
+  SiRedis,
+  SiRender,
+  SiResend,
+  SiSqlalchemy,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+  SiUpstash,
+  SiVercel,
+} from "react-icons/si";
+
+const SKILL_ICONS: Record<string, IconType> = {
+  "Python": SiPython,
+  "TypeScript": SiTypescript,
+  "JavaScript": SiJavascript,
+  "Java": SiOpenjdk,
+  "C": SiC,
+  "Next.js": SiNextdotjs,
+  "React": SiReact,
+  "FastAPI": SiFastapi,
+  "Express.js": SiExpress,
+  "Tailwind CSS": SiTailwindcss,
+  "PostgreSQL": SiPostgresql,
+  "Supabase": SiSupabase,
+  "Redis": SiRedis,
+  "Prisma ORM": SiPrisma,
+  "SQLAlchemy": SiSqlalchemy,
+  "OpenAI API": SiOpenai,
+  "Gemini API": SiGooglegemini,
+  "Google OAuth": SiGoogle,
+  "Resend": SiResend,
+  "Vercel": SiVercel,
+  "Render": SiRender,
+  "Railway": SiRailway,
+  "Cloudflare": SiCloudflare,
+  "Google Cloud Run": SiGooglecloud,
+  "Upstash": SiUpstash,
+  "Git": SiGit,
+  "GitHub": SiGithub,
+  "GitHub Actions": SiGithubactions,
+  "Docker": SiDocker,
+  "Claude Code": SiClaude,
+  "OpenAI Codex": SiOpenai,
+};
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
   return (
@@ -16,14 +83,19 @@ function SkillCard({ title, items, icon: Icon }: { title: string, items: string[
         <h3 className="font-display font-semibold text-lg text-foreground">{title}</h3>
       </div>
       <ul className="flex flex-wrap gap-3">
-        {items.map((item) => (
-          <li
-            key={item}
-            className="px-3 py-1.5 rounded-lg bg-muted/40 border border-border/40 text-xs font-display font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {item}
-          </li>
-        ))}
+        {items.map((item) => {
+          const SkillIcon = SKILL_ICONS[item];
+
+          return (
+            <li
+              key={item}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/40 border border-border/40 text-xs font-display font-medium tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {SkillIcon && <SkillIcon aria-hidden className="h-3.5 w-3.5 shrink-0" />}
+              {item}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

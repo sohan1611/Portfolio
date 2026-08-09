@@ -183,3 +183,31 @@ Codex switched to GPT-5.6-Terra at `ultra` for both.
   404 returns HTTP 404 with consistent noindex and the homepage still `index, follow`; drawer,
   skip link, clipboard and repo descriptions all unregressed; zero unnamed controls; zero
   uncaught errors.
+
+## 2026-08-09 — Work orders 10 & 11 (Claude → Codex): Technical Arsenal
+
+- WO10, content: added Neon / Render / Cloudflare, removed Antigravity from `tools` and
+  `aiDev`, added "Claude Code" and "OpenAI Codex" (full product names — bare "Claude" and
+  "Codex" are ambiguous on a recruiter-facing page), and moved "Resend" out of the "AI & APIs"
+  card into "Authentication & Integrations", where an email API belongs. Upstash and Resend
+  were already present — checked before adding rather than duplicating.
+- WO11, presentation: brand marks beside each chip via `react-icons/si`, already a dependency.
+  No new package, no downloaded assets, no external URL — the CSP requires self-contained.
+  Monochrome inheriting `currentColor` rather than brand colours, which §4 rules out. Map
+  lives in `Skills.tsx` (presentation), keyed off the strings in `portfolio.ts` (content).
+  31 of 49 chips get a mark; the other 18 are concepts and degrade to text-only by design.
+- **Claude's error: a dependency bump that broke the build.** `SiNeon` does not exist in
+  `react-icons@5.6.0`, so I bumped to 5.7.0 to get it. The build then failed with
+  `Export SiOpenai doesn't exist` — 5.7.0 *removes* the OpenAI mark. The two are mutually
+  exclusive from this source. Reverted to 5.6.0 and pinned it exactly; Neon stays text-only.
+  Recorded in AGENTS.md so the bump is not retried.
+- **Also caught: a bad verification command of mine.** I checked the build with
+  `grep -E "Compiled successfully|Error" && echo BUILD OK`, which printed "BUILD OK" on a
+  *failing* build because grep matched the word "Error". Check the exit code, not grep output.
+- New Codex constraint: `codex exec resume` fails on sessions run at `ultra`
+  (`direct app-server input is not allowed for multi-agent v2 sub-agents`) because ultra's
+  automatic task delegation makes them multi-agent. Corrections must be self-contained fresh
+  `codex exec` runs, not resumes.
+- Verified: lint silent, build exit 0, `/` static. 49 chips, 31 with marks, icons 14×14
+  inheriting the chip colour and `aria-hidden` so nothing is announced twice; both OpenAI
+  chips have marks; Neon and pgvector text-only; `grep Antigravity src/` returns nothing.
