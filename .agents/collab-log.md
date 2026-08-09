@@ -208,6 +208,10 @@ Codex switched to GPT-5.6-Terra at `ultra` for both.
   (`direct app-server input is not allowed for multi-agent v2 sub-agents`) because ultra's
   automatic task delegation makes them multi-agent. Corrections must be self-contained fresh
   `codex exec` runs, not resumes.
-- Verified: lint silent, build exit 0, `/` static. 49 chips, 31 with marks, icons 14×14
+- Follow-up (WO12): Neon got its mark after all, without the dependency bump. Its Simple Icons
+  artwork is a single 85-character path, so it is inlined in `Skills.tsx` as `SiNeonLocal`
+  typed `IconType`. Claude reached for a version bump first and only considered embedding the
+  path when challenged — worth remembering as the cheaper move for any brand react-icons lacks.
+- Verified: lint silent, build exit 0, `/` static. 49 chips, 32 with marks, icons 14×14
   inheriting the chip colour and `aria-hidden` so nothing is announced twice; both OpenAI
   chips have marks; Neon and pgvector text-only; `grep Antigravity src/` returns nothing.

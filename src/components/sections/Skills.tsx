@@ -39,6 +39,13 @@ import {
   SiVercel,
 } from "react-icons/si";
 
+// react-icons 5.6.0 predates SiNeon; 5.7.0 cannot be adopted because it drops SiOpenai.
+const SiNeonLocal: IconType = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M24 0V24l-9.365-8.045V24H0V0ZM2.942 21.087h8.751V9.563l9.365 8.204V2.919L2.942 2.914Z" />
+  </svg>
+);
+
 const SKILL_ICONS: Record<string, IconType> = {
   "Python": SiPython,
   "TypeScript": SiTypescript,
@@ -52,6 +59,7 @@ const SKILL_ICONS: Record<string, IconType> = {
   "Tailwind CSS": SiTailwindcss,
   "PostgreSQL": SiPostgresql,
   "Supabase": SiSupabase,
+  "Neon": SiNeonLocal,
   "Redis": SiRedis,
   "Prisma ORM": SiPrisma,
   "SQLAlchemy": SiSqlalchemy,

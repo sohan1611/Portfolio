@@ -263,10 +263,14 @@ driving a production build, not by reading alone.
   **`5.7.0` removes `SiOpenai`** — Simple Icons drops marks on trademark request — and the
   build fails outright with `Export SiOpenai doesn't exist in target module`. That same release
   adds `SiNeon`, so the two are mutually exclusive: 5.6.0 gives OpenAI (used by the "OpenAI
-  API" and "OpenAI Codex" chips) and no Neon; 5.7.0 gives Neon and no OpenAI. Two chips beat
-  one, so we stay on 5.6.0 and "Neon" renders text-only. Tried the bump 2026-08-09, broke the
-  build, reverted. The version is pinned without a caret precisely so `npm install` cannot
-  pull 5.7.0 silently.
+  API" and "OpenAI Codex" chips) and no Neon; 5.7.0 gives Neon and no OpenAI. Tried the bump
+  2026-08-09, broke the build, reverted. The version is pinned without a caret precisely so
+  `npm install` cannot pull 5.7.0 silently.
+
+  **Neon does not need the bump.** Its Simple Icons artwork is a single 85-character path,
+  inlined in `Skills.tsx` as `SiNeonLocal` and typed `IconType` so it drops into the same map.
+  Same trick works for any future brand react-icons lacks — copy the path from `simple-icons`,
+  keep `fill="currentColor"`, do not hardcode the brand colour.
 
 - **The 404 serves two `robots` meta tags on purpose. Do not "tidy" it.** Next emits its own
   `<meta name="robots" content="noindex"/>` for the not-found route, and `not-found.tsx` also
