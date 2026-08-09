@@ -258,6 +258,17 @@ driving a production build, not by reading alone.
   Revisit only if the site gains a backend, accepts user input, or loads third-party scripts.
   Until one of those is true, do not propose this again.
 
+- **Two arsenal marks deliberately come from outside `react-icons/si`. Do not "consolidate".**
+  `Java` uses `BiLogoJava` from `react-icons/bi`, because Simple Icons does not carry Oracle's
+  Java mark at all — it is a protected trademark they do not distribute — and `SiOpenjdk` is
+  the Duke mascot, not the coffee cup everyone recognises. `BiLogoJava` was chosen over
+  `FaJava` specifically for its 24×24 viewBox: Font Awesome's is 384×512 and would render ~10.5px
+  wide inside the 14px box, visibly narrower than every neighbour. `Neon` uses the locally
+  inlined `SiNeonLocal`, see below.
+
+  Redis renders its **2024 rebrand mark** (the script "R", `#FF4438`), not the old stacked
+  cubes. That is current and correct — confirmed by the owner 2026-08-09. Do not revert it.
+
 - **Brand colour on the Technical Arsenal marks is a deliberate, scoped exception to §4.**
   Chosen by the owner 2026-08-09. Marks are muted at rest and take their brand colour only on
   `group-hover`, via a `--brand` custom property set per chip in `Skills.tsx` and consumed by

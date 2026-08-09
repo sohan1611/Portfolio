@@ -6,6 +6,7 @@ import { Reveal } from "../ui/Reveal";
 import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench, Bot } from "lucide-react";
 import React from "react";
 import type { IconType } from "react-icons";
+import { BiLogoJava } from "react-icons/bi";
 import {
   SiC,
   SiClaude,
@@ -22,7 +23,6 @@ import {
   SiJavascript,
   SiNextdotjs,
   SiOpenai,
-  SiOpenjdk,
   SiPostgresql,
   SiPrisma,
   SiPython,
@@ -55,7 +55,7 @@ const SKILL_MARKS: Record<string, { icon: IconType; colour: string }> = {
   "React": { icon: SiReact, colour: "#61DAFB" },
   "JavaScript": { icon: SiJavascript, colour: "#F7DF1E" },
   "FastAPI": { icon: SiFastapi, colour: "#009688" },
-  "Java": { icon: SiOpenjdk, colour: FG },
+  "Java": { icon: BiLogoJava, colour: "#F89820" },
   "Express.js": { icon: SiExpress, colour: FG },
   "C": { icon: SiC, colour: "#A8B9CC" },
   "Tailwind CSS": { icon: SiTailwindcss, colour: "#06B6D4" },
