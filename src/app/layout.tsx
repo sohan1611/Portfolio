@@ -85,7 +85,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${geist.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -93,7 +93,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geist.variable} ${jetbrainsMono.variable} font-sans min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary dark`}
+        className="font-sans min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary dark"
       >
         <a
           href="#main-content"
