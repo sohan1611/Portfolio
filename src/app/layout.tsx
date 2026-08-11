@@ -91,6 +91,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
+        <script
+          dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("js")' }}
+        />
       </head>
       <body
         className="font-sans min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary dark"

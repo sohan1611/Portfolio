@@ -1,10 +1,12 @@
-// Placeholder for Google Analytics / Vercel Analytics integration.
-// To enable Google Analytics, uncomment and install @next/third-parties/google
-// import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// To enable Vercel Analytics, uncomment and install @vercel/analytics
-// import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
-
+// Vercel-hosted analytics and performance measurement require no keys or configuration.
 export function Analytics() {
-  return null;
+  return (
+    <>
+      <VercelAnalytics />
+      <SpeedInsights />
+    </>
+  );
 }

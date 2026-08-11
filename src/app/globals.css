@@ -86,6 +86,23 @@
   border-color: var(--primary);
 }
 
+/* Reveal animation. Elements are visible by default so the page still renders
+   without JavaScript; the `js` class is added in <head> before first paint. */
+.js [data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.js [data-reveal] {
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Terminal Block Style */
 .terminal-block {
   background-color: #0F172A;

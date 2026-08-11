@@ -2,24 +2,6 @@
 
 import * as React from "react";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToReducedMotion(onStoreChange: () => void) {
-  if (typeof window === "undefined" || !window.matchMedia) return () => {};
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", onStoreChange);
-  return () => mq.removeEventListener("change", onStoreChange);
-}
-
-function getReducedMotionSnapshot() {
-  if (typeof window === "undefined" || !window.matchMedia) return false;
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function getReducedMotionServerSnapshot() {
-  return false;
-}
-
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
@@ -29,53 +11,45 @@ interface RevealProps {
 
 export function Reveal({ children, className = "", delay = 0, once = false }: RevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = React.useState(false);
-  const prefersReducedMotion = React.useSyncExternalStore(
-    subscribeToReducedMotion,
-    getReducedMotionSnapshot,
-    getReducedMotionServerSnapshot
-  );
 
   React.useEffect(() => {
-    if (prefersReducedMotion) return;
-
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const set = (visible: boolean) => {
+      el.setAttribute("data-reveal", visible ? "visible" : "hidden");
+    };
+
+    // Anything already on screen when JS takes over stays visible, so a dead
+    // observer can never blank the page.
+    const { top, bottom } = el.getBoundingClientRect();
+    set(top < window.innerHeight && bottom > 0);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          set(true);
           if (once) {
             observer.unobserve(el);
           }
         } else if (!once) {
           // Only hide if it's not set to once
-          setIsVisible(false);
+          set(false);
         }
       },
-      // Trigger when 10% of the element is visible
+      // Trigger when 10% of the element is visible, 40px inside the viewport.
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [once, prefersReducedMotion]);
+  }, [once]);
 
   return (
     <div
       ref={ref}
       className={className}
-      style={{
-        opacity: prefersReducedMotion || isVisible ? 1 : 0,
-        transform: prefersReducedMotion || isVisible ? "translateY(0)" : "translateY(14px)",
-        // Remove delay on exit so it hides immediately when out of view
-        transition: prefersReducedMotion
-          ? "none"
-          : isVisible
-          ? `opacity 300ms ease-out ${delay}ms, transform 300ms ease-out ${delay}ms`
-          : `opacity 300ms ease-out, transform 300ms ease-out`,
-      }}
+      style={delay !== 0 ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </div>
