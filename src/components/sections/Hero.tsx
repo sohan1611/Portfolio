@@ -52,8 +52,6 @@ export function Hero() {
               <FaLinkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </a>
-            <div className="h-4 w-px bg-border mx-2"></div>
-            <span className="text-sm font-medium text-foreground">CGPA: {portfolioData.personal.cgpa}</span>
           </div>
         </Reveal>
       </div>

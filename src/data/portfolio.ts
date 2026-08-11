@@ -39,7 +39,7 @@ export const portfolioData = {
     tools: ["Git", "GitHub", "GitHub Actions", "Docker"],
     aiDev: ["Claude Code", "OpenAI Codex", "AI-Augmented Engineering", "Rapid Prototyping", "Workflow Automation"],
     interests: ["Artificial Intelligence", "Data Architecture", "Cybersecurity", "AI-Assisted Full Stack Development"],
-    currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Cybersecurity", "AI-Assisted Full Stack Development"]
+    currentlyLearning: ["Data Structures & Algorithms (DSA)", "Data Architecture", "Artificial Intelligence", "Generative AI", "Cybersecurity", "AI-Assisted Full Stack Development"]
   },
   futureGoals: [
     "Building practical AI applications",
@@ -134,29 +134,5 @@ export const portfolioData = {
       showViewButton: true,
       showDownloadButton: true,
     },
-    {
-      title: "Data Structures & Algorithms (DSA)",
-      issuer: "GeeksforGeeks",
-      status: "Ongoing",
-      certificateFile: null,
-      showViewButton: false,
-      showDownloadButton: false,
-    },
-    {
-      title: "Generative AI",
-      issuer: "GeeksforGeeks",
-      status: "Ongoing",
-      certificateFile: null,
-      showViewButton: false,
-      showDownloadButton: false,
-    },
-    {
-      title: "Data Architecture",
-      issuer: "Coursera",
-      status: "Ongoing",
-      certificateFile: null,
-      showViewButton: false,
-      showDownloadButton: false,
-    }
   ]
 };
