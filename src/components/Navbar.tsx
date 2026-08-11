@@ -105,7 +105,15 @@ export function Navbar() {
             </Link>
           ))}
         </nav>
-        
+
+        <div
+          aria-hidden="true"
+          className="hidden items-center gap-1.5 text-xs font-display text-muted-foreground md:flex"
+        >
+          <span>Press</span>
+          <kbd className="rounded border border-border px-1.5 py-0.5 font-display text-xs">/</kbd>
+        </div>
+
         <button
           ref={menuButtonRef}
           type="button"

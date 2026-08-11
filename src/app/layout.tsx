@@ -70,7 +70,12 @@ export default function RootLayout({
         "alumniOf": {
           "@type": "CollegeOrUniversity",
           "name": "KIIT University"
-        }
+        },
+        "knowsAbout": [
+          ...portfolioData.skills.programmingLanguages,
+          ...portfolioData.skills.frameworks,
+          ...portfolioData.skills.databases,
+        ]
       },
       {
         "@type": "WebSite",

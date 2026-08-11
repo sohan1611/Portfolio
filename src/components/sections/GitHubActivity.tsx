@@ -16,6 +16,9 @@ interface GitHubRepo {
 // How many of the most recently updated repositories to surface.
 const RECENT_REPO_COUNT = 4;
 
+// The portfolio's own repository would otherwise dominate this list as it is worked on most often.
+const EXCLUDED_REPOS = ["portfolio"];
+
 // Only used when a repository has no description set on GitHub.
 const FALLBACK_DESCRIPTIONS: Record<string, string> = {
   "aspirova": "AI-powered opportunity almanac indexing internships, jobs, fellowships, and research programmes from across the web.",
@@ -30,7 +33,7 @@ async function getGitHubData() {
     const username = "sohan1611";
     const [userRes, reposRes] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`, { next: { revalidate: 3600 } }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=${RECENT_REPO_COUNT}`, { next: { revalidate: 3600 } })
+      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=${RECENT_REPO_COUNT + EXCLUDED_REPOS.length}`, { next: { revalidate: 3600 } })
     ]);
 
     if (!userRes.ok || !reposRes.ok) {
@@ -44,6 +47,7 @@ async function getGitHubData() {
     // The API already returns these sorted by most recently updated, so the
     // section stays current on its own as repositories are pushed to.
     const recentRepos = repos
+      .filter((repo: GitHubRepo) => !EXCLUDED_REPOS.includes(repo.name.toLowerCase()))
       .slice(0, RECENT_REPO_COUNT)
       .map((repo: GitHubRepo) => ({
         ...repo,
