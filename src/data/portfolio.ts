@@ -118,6 +118,7 @@ export const portfolioData = {
     {
       title: "Machine Learning & Agentic AI",
       issuer: "E&ICT Academy, IIT Roorkee",
+      programType: "Summer Training & Internship Program",
       status: "Completed",
       certificateFile: "/certificates/eict-iitr-ml-agentic-ai-certificate.jpg",
       certificateWidth: 3509,

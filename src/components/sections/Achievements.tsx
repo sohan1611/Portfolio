@@ -12,6 +12,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 interface Certificate {
   title: string;
   issuer: string;
+  programType?: string;
   status: string;
   certificateFile: string | null;
   certificateWidth?: number;
@@ -122,7 +123,10 @@ export function Achievements() {
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-sm font-display text-muted-foreground mb-3">{item.issuer}</p>
+                  <p className={`text-sm font-display text-muted-foreground${item.programType ? "" : " mb-3"}`}>{item.issuer}</p>
+                  {item.programType && (
+                    <p className="mt-1 mb-3 text-xs font-display text-muted-foreground">{item.programType}</p>
+                  )}
                   
                   {item.status === "Ongoing" && (
                     <div className="inline-flex items-center gap-2">
