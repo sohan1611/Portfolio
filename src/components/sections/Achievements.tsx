@@ -7,6 +7,7 @@ import { Award, Eye, Download, X, Clock } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeading } from "../ui/SectionHeading";
 
 interface Certificate {
   title: string;
@@ -106,10 +107,7 @@ export function Achievements() {
     <Section id="achievements" className="border-t border-border bg-background">
       <div className="max-w-4xl space-y-8">
         <Reveal>
-          <div>
-            <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Certifications</h2>
-            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-          </div>
+          <SectionHeading>Certifications</SectionHeading>
         </Reveal>
 
         <div className="space-y-6">

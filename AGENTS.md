@@ -243,6 +243,19 @@ driving a production build, not by reading alone.
 - [x] **The 404 inherited the portfolio's title.** Now "Page Not Found | Sohan Mandal" with
       its own description, still returning HTTP 404.
 
+### Design conventions
+
+- **Section headings go through `src/components/ui/SectionHeading.tsx`.** Do not hand-write
+  `<h2>` + `<div className="h-1 w-12 bg-primary rounded mt-2">` again. That pattern had been
+  copied into eleven places and no two agreed: four carried `font-display` and seven did not,
+  Featured Projects' bar sat flush with no gap, and both Contact headings had no bar at all
+  with one at 24px instead of 30px. The font split was invisible until the webfonts started
+  working (see below), then became obvious. One component, `align="center"` for the two
+  Contact headings, and the pattern can only be written one way.
+
+  The `<h2>`s inside the certificate and resume modals are dialog labels, not section headers
+  — they are correctly excluded.
+
 ### Settled decisions — do not re-raise
 
 - **Full Content-Security-Policy: deliberately not implemented.** Decided by the owner

@@ -3,6 +3,7 @@
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeading } from "../ui/SectionHeading";
 import { Code2, Brain, Sparkles, Layers, Database, Cpu, Lock, Cloud, Wrench, Bot } from "lucide-react";
 import React from "react";
 import type { IconType } from "react-icons";
@@ -134,10 +135,7 @@ export function Skills() {
     <Section id="skills">
       <div className="space-y-12">
         <Reveal>
-          <div>
-            <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Technical Arsenal</h2>
-            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-          </div>
+          <SectionHeading>Technical Arsenal</SectionHeading>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -149,10 +147,7 @@ export function Skills() {
         </div>
 
         <Reveal>
-          <div className="pt-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-2 text-foreground">Interests & Learning</h2>
-            <div className="h-1 w-12 bg-primary rounded"></div>
-          </div>
+          <SectionHeading className="pt-12">Interests &amp; Learning</SectionHeading>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

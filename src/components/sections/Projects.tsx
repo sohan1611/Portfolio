@@ -3,6 +3,7 @@
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeading } from "../ui/SectionHeading";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
@@ -11,10 +12,7 @@ export function Projects() {
     <Section id="projects" className="border-t border-border bg-muted/10">
       <div className="space-y-12">
         <Reveal>
-          <div>
-            <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">Featured Projects</h2>
-            <div className="h-1 w-12 bg-primary rounded"></div>
-          </div>
+          <SectionHeading>Featured Projects</SectionHeading>
         </Reveal>
 
         <div className="space-y-12">

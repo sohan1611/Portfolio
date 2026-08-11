@@ -3,6 +3,7 @@
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeading } from "../ui/SectionHeading";
 import { BookOpen } from "lucide-react";
 
 export function About() {
@@ -12,10 +13,7 @@ export function About() {
         <Reveal>
           <div className="flex items-center gap-3">
             <BookOpen className="h-8 w-8 text-primary" />
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground">About</h2>
-              <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-            </div>
+            <SectionHeading>About</SectionHeading>
           </div>
         </Reveal>
 

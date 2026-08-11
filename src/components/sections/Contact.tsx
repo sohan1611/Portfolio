@@ -7,6 +7,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "../ui/Reveal";
 import { ViewResumeButton } from "../ui/ViewResumeButton";
+import { SectionHeading } from "../ui/SectionHeading";
 
 export function Contact() {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
@@ -46,9 +47,7 @@ export function Contact() {
         {/* Resume Summary Card */}
         <div id="resume" className="space-y-6">
         <Reveal>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">Resume Overview</h2>
-          </div>
+          <SectionHeading align="center" className="mb-8">Resume Overview</SectionHeading>
         </Reveal>
           
         <Reveal delay={80}>
@@ -102,7 +101,7 @@ export function Contact() {
         {/* Contact Links */}
         <Reveal>
           <div className="text-center pt-8 border-t border-border/50">
-          <h2 className="text-2xl font-bold tracking-tight mb-4 text-foreground">Let&apos;s Connect</h2>
+          <SectionHeading align="center" className="mb-4">Let&apos;s Connect</SectionHeading>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
             Ready to contribute to impactful engineering teams. Feel free to reach out via email or connect on LinkedIn.
           </p>

@@ -2,6 +2,7 @@ import { Section } from "../ui/Section";
 import { GitCommit, BookOpen, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeading } from "../ui/SectionHeading";
 
 interface GitHubRepo {
   id: number;
@@ -62,10 +63,7 @@ function GitHubFallback() {
       <Reveal>
         <div className="flex items-center gap-3 mb-6">
           <GitCommit className="h-8 w-8 text-primary" />
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">GitHub Profile</h2>
-            <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-          </div>
+          <SectionHeading>GitHub Profile</SectionHeading>
         </div>
       </Reveal>
       <Reveal delay={50}>
@@ -98,10 +96,7 @@ export async function GitHubActivity() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <GitCommit className="h-8 w-8 text-primary" />
-              <div>
-                <h2 className="text-3xl font-display font-bold tracking-tight text-foreground">GitHub Activity</h2>
-                <div className="h-1 w-12 bg-primary rounded mt-2"></div>
-              </div>
+              <SectionHeading>GitHub Activity</SectionHeading>
             </div>
             
             <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-lg border border-border">
