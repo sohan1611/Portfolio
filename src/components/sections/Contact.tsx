@@ -51,7 +51,7 @@ export function Contact() {
         </Reveal>
           
         <Reveal delay={80}>
-          <div className="p-8 rounded-2xl glass-surface">
+          <div className="p-6 md:p-8 rounded-xl glass-surface">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div>

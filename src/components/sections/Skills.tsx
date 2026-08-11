@@ -86,7 +86,7 @@ const SKILL_MARKS: Record<string, { icon: IconType; colour: string }> = {
 
 function SkillCard({ title, items, icon: Icon }: { title: string, items: string[], icon: React.ElementType }) {
   return (
-    <div className="p-8 rounded-xl glass-surface hover-glow">
+    <div className="p-6 md:p-8 rounded-xl glass-surface hover-glow">
       <div className="flex items-center gap-4 mb-6">
         <div className="p-2.5 rounded-md bg-primary/10 text-primary">
           <Icon className="h-5 w-5" />
