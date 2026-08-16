@@ -41,11 +41,11 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" className="border-t border-border bg-muted/30 pb-24 md:pb-32">
+    <Section id="resume" className="border-t border-border bg-muted/30 pb-24 md:pb-32">
       <div className="max-w-4xl mx-auto space-y-16">
         
         {/* Resume Summary Card */}
-        <div id="resume" className="space-y-6">
+        <div className="space-y-6">
         <Reveal>
           <SectionHeading align="center" className="mb-8">Resume Overview</SectionHeading>
         </Reveal>
@@ -100,7 +100,7 @@ export function Contact() {
 
         {/* Contact Links */}
         <Reveal>
-          <div className="text-center pt-8 border-t border-border/50">
+          <div id="contact" className="text-center pt-8 border-t border-border/50 scroll-mt-20">
           <SectionHeading align="center" className="mb-4">Let&apos;s Connect</SectionHeading>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
             Ready to contribute to impactful engineering teams. Feel free to reach out via email or connect on LinkedIn.
