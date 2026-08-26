@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/Analytics";
+import { CommandPalette } from "@/components/CommandPalette";
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 import { portfolioData } from "@/data/portfolio";
 
 const geist = Geist({ 
@@ -109,7 +112,10 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <Navbar />
+        <CommandPalette />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>

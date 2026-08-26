@@ -6,13 +6,13 @@ import Link from "next/link";
 import { portfolioData } from "@/data/portfolio";
 
 const NAV_LINKS = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Education", href: "#education" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Resume", href: "#resume" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/#home" },
+  { name: "About", href: "/#about" },
+  { name: "Education", href: "/#education" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Resume", href: "/#resume" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export function Navbar() {
@@ -87,7 +87,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <Link href="#home" className="rounded text-sm font-display font-bold tracking-tight text-slate-200/85 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+          <Link href="/#home" className="rounded text-sm font-display font-bold tracking-tight text-slate-200/85 hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
             {portfolioData.personal.name}
           </Link>
         </div>

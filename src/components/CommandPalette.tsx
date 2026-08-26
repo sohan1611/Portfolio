@@ -6,16 +6,16 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
 const LINKS = [
-  { name: "Home", href: "#home" },
-  { name: "Highlights", href: "#highlights" },
-  { name: "About", href: "#about" },
-  { name: "Education", href: "#education" },
-  { name: "Skills", href: "#skills" },
-  { name: "Future Goals", href: "#goals" },
-  { name: "Projects", href: "#projects" },
-  { name: "Achievements", href: "#achievements" },
-  { name: "Resume", href: "#resume" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/#home" },
+  { name: "Highlights", href: "/#highlights" },
+  { name: "About", href: "/#about" },
+  { name: "Education", href: "/#education" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Future Goals", href: "/#goals" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Achievements", href: "/#achievements" },
+  { name: "Resume", href: "/#resume" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export function CommandPalette() {

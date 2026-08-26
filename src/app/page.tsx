@@ -1,6 +1,3 @@
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { CommandPalette } from "@/components/CommandPalette";
 import { Hero } from "@/components/sections/Hero";
 import { Highlights } from "@/components/sections/Highlights";
 import { About } from "@/components/sections/About";
@@ -14,22 +11,17 @@ import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <CommandPalette />
-      <main id="main-content" className="flex min-h-screen flex-col items-center">
-        <Hero />
-        <Highlights />
-        <About />
-        <Education />
-        <Skills />
-        <FutureGoals />
-        <GitHubActivity />
-        <Projects />
-        <Achievements />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <main id="main-content" className="flex min-h-screen flex-col items-center">
+      <Hero />
+      <Highlights />
+      <About />
+      <Education />
+      <Skills />
+      <FutureGoals />
+      <GitHubActivity />
+      <Projects />
+      <Achievements />
+      <Contact />
+    </main>
   );
 }
