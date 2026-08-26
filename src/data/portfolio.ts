@@ -51,6 +51,7 @@ export const portfolioData = {
   projects: [
     {
       title: "Aspirova",
+      slug: "aspirova",
       problemStatement: "Student opportunities — internships, fellowships, research programmes and competitions — are scattered across hundreds of separate company career pages, so the ones that matter are easy to miss entirely.",
       solution: "Built an opportunity almanac that crawls company ATS endpoints daily and indexes every listing into one searchable platform, linking each application back to its original source.",
       keyFeatures: [
@@ -67,6 +68,7 @@ export const portfolioData = {
     },
     {
       title: "Apex Intel",
+      slug: "apex-intel",
       problemStatement: "Startup due diligence requires extensive research across markets, competitors, risks, and business viability, making investment analysis time-consuming and fragmented.",
       solution: "Built an autonomous multi-agent platform that analyzes startups and generates structured investment memos for investors and analysts.",
       keyFeatures: [
@@ -83,6 +85,7 @@ export const portfolioData = {
     },
     {
       title: "SentinelIQ",
+      slug: "sentineliq",
       problemStatement: "Analyzing public company filings and transcripts to detect inconsistencies and governance risks is a dense, fragmented, and time-consuming process.",
       solution: "Built an institutional-grade financial forensics engine that analyzes public data to detect potential fraud and governance risks.",
       keyFeatures: [
@@ -94,11 +97,11 @@ export const portfolioData = {
       ],
       technologies: ["Financial Forensics", "Risk Detection", "AI Analysis"],
       githubUrl: "https://github.com/sohan1611/SentinelIQ",
-      liveUrl: null,
       status: "In Progress"
     },
     {
       title: "Reality Drift",
+      slug: "reality-drift",
       problemStatement: "People often struggle to understand long-term behavioral patterns and the future impact of their daily habits.",
       solution: "Built an AI-powered life pattern simulator that analyzes habits and predicts future behavioral trends over a 30-day horizon.",
       keyFeatures: [

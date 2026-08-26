@@ -114,7 +114,9 @@ export default function RootLayout({
         </a>
         <Navbar />
         <CommandPalette />
-        {children}
+        <main id="main-content" className="flex min-h-screen flex-col items-center">
+          {children}
+        </main>
         <Footer />
         <Analytics />
       </body>

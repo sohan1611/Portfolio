@@ -11,7 +11,7 @@ import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main id="main-content" className="flex min-h-screen flex-col items-center">
+    <>
       <Hero />
       <Highlights />
       <About />
@@ -22,6 +22,6 @@ export default function Home() {
       <Projects />
       <Achievements />
       <Contact />
-    </main>
+    </>
   );
 }

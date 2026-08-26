@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
@@ -25,7 +26,12 @@ export function Projects() {
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div>
                       <h3 className="text-2xl font-display font-bold text-foreground mb-3">
-                        {project.title}
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          className="rounded text-inherit transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                        >
+                          {project.title}
+                        </Link>
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
