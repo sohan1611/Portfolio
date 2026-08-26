@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
-import { Award, Eye, Download, X, Clock } from "lucide-react";
+import { Award, Eye, Download, X, Clock, ExternalLink } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Reveal } from "../ui/Reveal";
@@ -13,6 +13,8 @@ interface Certificate {
   title: string;
   issuer: string;
   programType?: string;
+  verificationUrl?: string;
+  verificationNote?: string;
   status: string;
   certificateFile: string | null;
   certificateWidth?: number;
@@ -123,9 +125,26 @@ export function Achievements() {
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                  <p className={`text-sm font-display text-muted-foreground${item.programType ? "" : " mb-3"}`}>{item.issuer}</p>
+                  <p className={`text-sm font-display text-muted-foreground${item.programType || item.verificationUrl ? "" : " mb-3"}`}>{item.issuer}</p>
                   {item.programType && (
-                    <p className="mt-1 mb-3 text-xs font-display text-muted-foreground">{item.programType}</p>
+                    <p className={`mt-1 text-xs font-display text-muted-foreground${item.verificationUrl ? "" : " mb-3"}`}>{item.programType}</p>
+                  )}
+                  {item.verificationUrl && (
+                    <div className="mt-2">
+                      <a
+                        href={item.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Verify credential for ${item.title}`}
+                        className={`inline-flex items-center gap-1 rounded text-xs font-display text-primary hover:text-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring${item.verificationNote ? "" : " mb-3"}`}
+                      >
+                        Verify credential
+                        <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                      </a>
+                      {item.verificationNote && (
+                        <p className="mt-1 mb-3 text-xs text-muted-foreground">{item.verificationNote}</p>
+                      )}
+                    </div>
                   )}
                   
                   {item.status === "Ongoing" && (
