@@ -6,7 +6,7 @@ import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 import { PdfViewerButton } from "../ui/PdfViewerButton";
-import { ExternalLink, FileText } from "lucide-react";
+import { ArrowRight, ExternalLink, FileText } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 export function Projects() {
@@ -83,13 +83,22 @@ export function Projects() {
                 </div>
 
                 <div className="px-6 md:px-8 py-4 border-t border-border/50 bg-background/30 flex flex-wrap items-center gap-6">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    aria-label={`View Details for ${project.title}`}
+                    className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  >
+                    <ArrowRight className="mr-2 h-4 w-4" />
+                    View Details
+                  </Link>
+
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Source Code for ${project.title}`}
-                      className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+                      className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     >
                       <FaGithub className="mr-2 h-4 w-4" />
                       Source Code
@@ -101,7 +110,7 @@ export function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Live Demo for ${project.title}`}
-                      className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+                      className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Live Demo

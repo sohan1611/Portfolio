@@ -9,6 +9,10 @@ import { Projects } from "@/components/sections/Projects";
 import { Achievements } from "@/components/sections/Achievements";
 import { Contact } from "@/components/sections/Contact";
 
+// The route's cache window is the minimum of this value and every fetch inside it.
+// Declared explicitly so it does not depend on GitHubActivity's fetch options.
+export const revalidate = 3600;
+
 export default function Home() {
   return (
     <>

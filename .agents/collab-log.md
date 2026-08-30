@@ -259,3 +259,29 @@ Codex switched to GPT-5.6-Terra at `ultra` for both.
   gaps in both axes, so the 20px targets keep the same 2.5.8 spacing exception as their
   siblings.
 
+## 2026-08-30 — Work order 29 (Claude → Codex): five audit findings
+
+Found by auditing the live site, not by reading. All five fixed in one order.
+
+- **Project pages were undiscoverable.** Measured on production: exactly 4 links pointed at
+  `/projects/*` and all 4 were card titles, rendering with `text-decoration: none` and the same
+  colour as a non-link heading. A `View Details` link now leads each card footer. Home page now
+  carries 8 project links.
+- **The 1h ISR window was never declared on the route.** It came entirely from GitHubActivity's
+  fetch options. `page.tsx` now declares it. Recorded in AGENTS.md §3 — this is the same coupling
+  that cost Aspirova eleven days (Case 1 of the technical docs published earlier today).
+- **Project pages had no structured data of their own**, only the inherited site graph. Each now
+  emits a `SoftwareSourceCode` node whose author `@id` matches layout's Person, so the graphs
+  merge. `targetProduct` appears only where `liveUrl` exists — verified absent on SentinelIQ.
+- **Eight anchors lacked the shared focus idiom** (4 in GitHubActivity, 2 in Projects, 2 on the
+  detail page) and fell back to the browser default. Claude's first grep found only one of the
+  four in GitHubActivity; the scope was corrected before speccing.
+- **`sitemap.ts` stamped `new Date()`** on all five URLs at build time, claiming every page
+  changed on every deploy. Dropped — a lastmod crawlers learn to distrust is worse than none.
+
+Verification note worth keeping: while checking the focus rings Claude nearly reported a
+site-wide "no focus indicator" bug. Two measurement traps produced it — programmatic `.focus()`
+does not match `:focus-visible`, and `transition-all` elements read as all-transparent
+`box-shadow` in a driven browser. Disabling the transition showed the real value,
+`rgb(194, 198, 214) 0 0 0 1px`. Both traps are now written up in AGENTS.md.
+

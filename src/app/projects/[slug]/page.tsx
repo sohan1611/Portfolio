@@ -76,8 +76,38 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const canonicalUrl = `${portfolioData.personal.siteUrl}/projects/${project.slug}`;
+
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: project.title,
+    description: project.solution,
+    url: canonicalUrl,
+    codeRepository: project.githubUrl,
+    author: {
+      "@type": "Person",
+      "@id": `${portfolioData.personal.siteUrl}/#person`,
+      name: portfolioData.personal.name,
+    },
+    ...(project.liveUrl
+      ? {
+          targetProduct: {
+            "@type": "SoftwareApplication",
+            name: project.title,
+            url: project.liveUrl,
+            applicationCategory: "WebApplication",
+          },
+        }
+      : {}),
+  };
+
   return (
     <Section id="project" className="border-t border-border bg-muted/10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd).replace(/</g, "\\u003c") }}
+      />
       <div className="space-y-12">
         <Reveal>
           <Link
@@ -166,7 +196,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Source Code for ${project.title}`}
-                className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+                className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <FaGithub className="mr-2 h-4 w-4" />
                 Source Code
@@ -178,7 +208,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Live Demo for ${project.title}`}
-                className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+                className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Live Demo

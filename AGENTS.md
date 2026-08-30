@@ -43,7 +43,12 @@ differ in exactly the area that already caused one shipped bug (see §5).
 
 - **Next.js 16** App Router, Turbopack, **React 19**, **TypeScript**, **Tailwind v4**.
 - Deployed to Vercel from `main`. Live at **https://sohan16.com**.
-- The page is a single statically prerendered route with `revalidate: 3600`.
+- Routes: `/` plus four prerendered project pages at `/projects/<slug>` via
+  `generateStaticParams`. `/` declares `export const revalidate = 3600` in `page.tsx`.
+  **Keep that export.** Before it existed the 1h window came only from GitHubActivity's
+  `fetch(..., { next: { revalidate: 3600 } })` calls — a route's window is the minimum of
+  its own value and every fetch inside it, so a component's fetch options silently governed
+  the whole page.
 - **All content lives in `src/data/portfolio.ts`.** Edit that file, never hardcode copy into
   section components. `personal.siteUrl` is the single source of truth for the domain —
   metadata, JSON-LD, sitemap and robots all derive from it.
@@ -294,6 +299,20 @@ driving a production build, not by reading alone.
   Express, Prisma, OpenAI — all under 1.6:1 against `#0B0F14`) and are deliberately mapped to
   `var(--foreground)` instead. That is not a fudge: each of those ships a white mark as its
   official dark-background variant. Do not "restore" their real hex; they would vanish.
+
+- **`focus-visible:ring-ring` resolves to nothing. The rings still work — by accident.**
+  `--color-ring` is not defined in the `@theme` block in `globals.css`, so `ring-ring` generates
+  no declaration. Measured: `--tw-ring-color` computes to empty and Tailwind v4's `ring-1` falls
+  back to `currentcolor`, so all 38 usages paint a 1px ring in the element's own text colour.
+
+  Two traps when checking this. `.focus()` from a script does **not** match `:focus-visible`, so
+  programmatic focus reports no ring on elements that have one. And every element carrying
+  `transition-all` reports an all-transparent `box-shadow` when read from a driven browser — the
+  transition never advances without paint frames. Set `el.style.transition = 'none'` before
+  reading, or you will conclude the ring is missing when it is not.
+
+  If the ring colour should be deliberate rather than inherited, define `--color-ring` — but that
+  changes the focus colour on all 38 elements at once, so it is a design decision, not a fix.
 
 - **`react-icons` is pinned to exactly `5.6.0`. Do not bump it without checking `SiOpenai`.**
   The Technical Arsenal chips take their brand marks from `react-icons/si` (Simple Icons).

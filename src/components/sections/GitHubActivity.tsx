@@ -73,7 +73,7 @@ function GitHubFallback() {
       <Reveal delay={50}>
         <div className="p-6 rounded-xl bg-card border border-border text-center">
           <p className="text-muted-foreground mb-4">View my full open-source portfolio and recent activity directly on GitHub.</p>
-          <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-primary hover:underline transition-transform duration-200 hover:-translate-y-0.5">
+          <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded text-sm font-medium text-primary hover:underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
             Visit @sohan1611 <ExternalLink className="ml-1 h-3.5 w-3.5" />
           </a>
         </div>
@@ -116,7 +116,7 @@ export async function GitHubActivity() {
               <h3 className="text-xl font-display font-semibold text-foreground">Recent Repositories</h3>
             </Reveal>
             <Reveal delay={50}>
-              <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm font-display text-primary hover:text-accent transition-all duration-200 hover:-translate-y-0.5 hidden sm:flex items-center">
+              <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="rounded text-sm font-display text-primary hover:text-accent transition-all duration-200 hover:-translate-y-0.5 hidden sm:flex items-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
                 View Profile <ExternalLink className="ml-1 h-3 w-3" />
               </a>
             </Reveal>
@@ -131,7 +131,7 @@ export async function GitHubActivity() {
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] glass-surface hover-glow transition-all duration-300 hover:-translate-y-0.5 group"
+                    className="block p-6 rounded-xl border border-border/50 dark:border-[#1E293B] glass-surface hover-glow transition-all duration-300 hover:-translate-y-0.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                   >
                   <div className="flex items-center gap-2 mb-3">
                     <BookOpen className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -158,7 +158,7 @@ export async function GitHubActivity() {
             })}
           </div>
           <Reveal delay={200}>
-            <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex sm:hidden items-center mt-4 transition-transform duration-200 hover:-translate-y-0.5">
+              <a href={data.user.html_url} target="_blank" rel="noopener noreferrer" className="rounded text-sm text-primary hover:underline flex sm:hidden items-center mt-4 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
               View full profile on GitHub <ExternalLink className="ml-1 h-3 w-3" />
             </a>
           </Reveal>
