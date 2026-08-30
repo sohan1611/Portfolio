@@ -64,6 +64,8 @@ export const portfolioData = {
       technologies: ["Career Intelligence", "Vector Search", "Data Aggregation"],
       githubUrl: "https://github.com/sohan1611/Aspirova",
       liveUrl: "https://www.aspirova.org",
+      docsUrl: "/docs/aspirova-technical-overview.pdf",
+      docsLabel: "Technical Overview",
       status: "Live"
     },
     {

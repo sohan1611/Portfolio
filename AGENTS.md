@@ -309,6 +309,15 @@ driving a production build, not by reading alone.
   Same trick works for any future brand react-icons lacks — copy the path from `simple-icons`,
   keep `fill="currentColor"`, do not hardcode the brand colour.
 
+- **`PdfViewerButton`'s `icon` prop is a `ReactNode`, not a component type. Do not "improve" it.**
+  It looks like it should be `React.ComponentType`, and that is how it was first written — the
+  home page was fine, because `Projects.tsx` is `"use client"`. But `/projects/[slug]/page.tsx`
+  is a **server** component, and a function cannot cross the server/client boundary. The build
+  failed at prerender with *"Functions cannot be passed directly to Client Components"*, on
+  `/projects/aspirova` only. Call sites pass the rendered element,
+  `icon={<FileText className="mr-2 h-4 w-4" />}`. Same rule applies to any future prop on a
+  `"use client"` component that a server component might pass.
+
 - **The 404 serves two `robots` meta tags on purpose. Do not "tidy" it.** Next emits its own
   `<meta name="robots" content="noindex"/>` for the not-found route, and `not-found.tsx` also
   sets `robots: { index: false, follow: true }`, so the HTML carries two tags that both say

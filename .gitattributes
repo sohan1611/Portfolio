@@ -1,0 +1,16 @@
+# Binary assets must never be line-ending converted. Git guesses "binary" by looking for a
+# NUL byte near the start of a file, and some PDF generators (ReportLab) emit none — so
+# public/docs/aspirova-technical-overview.pdf was classified as LF text and a checkout on a
+# machine with core.autocrlf=true rewrote it with CRLF, growing it 46,054 -> 46,451 bytes and
+# corrupting it. Declare the types explicitly rather than relying on the heuristic.
+
+*.pdf   binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary

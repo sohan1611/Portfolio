@@ -5,7 +5,8 @@ import { portfolioData } from "@/data/portfolio";
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
-import { ExternalLink } from "lucide-react";
+import { PdfViewerButton } from "../ui/PdfViewerButton";
+import { ExternalLink, FileText } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 export function Projects() {
@@ -105,6 +106,18 @@ export function Projects() {
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Live Demo
                     </a>
+                  )}
+                  {project.docsUrl && project.docsLabel && (
+                    <PdfViewerButton
+                      fileUrl={project.docsUrl}
+                      title={`${project.title} — ${project.docsLabel}`}
+                      label={project.docsLabel}
+                      ariaLabel={`${project.docsLabel} for ${project.title}`}
+                      iframeTitle={`${project.title} ${project.docsLabel}`}
+                      closeLabel={`Close ${project.title} ${project.docsLabel.toLowerCase()} viewer`}
+                      icon={<FileText className="mr-2 h-4 w-4" />}
+                      className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+                    />
                   )}
                 </div>
               </div>

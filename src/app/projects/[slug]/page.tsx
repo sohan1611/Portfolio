@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 import { portfolioData } from "@/data/portfolio";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { PdfViewerButton } from "@/components/ui/PdfViewerButton";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -182,6 +183,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Live Demo
               </a>
+            )}
+            {project.docsUrl && project.docsLabel && (
+              <PdfViewerButton
+                fileUrl={project.docsUrl}
+                title={`${project.title} — ${project.docsLabel}`}
+                label={project.docsLabel}
+                ariaLabel={`${project.docsLabel} for ${project.title}`}
+                iframeTitle={`${project.title} ${project.docsLabel}`}
+                closeLabel={`Close ${project.title} ${project.docsLabel.toLowerCase()} viewer`}
+                icon={<FileText className="mr-2 h-4 w-4" />}
+                className="flex items-center text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5"
+              />
             )}
           </div>
         </Reveal>

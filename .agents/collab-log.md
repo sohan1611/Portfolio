@@ -234,3 +234,28 @@ Codex switched to GPT-5.6-Terra at `ultra` for both.
   colour at rest (the muted tone); `--brand` resolves to `#F38020` on Cloudflare, `#34D59A` on
   Neon, `#D97757` on Claude Code, `#dae2fd` on Vercel/GitHub/OpenAI Codex; SQL and pgvector
   carry no `--brand` at all. Lint silent, build exit 0.
+
+## 2026-08-30 — Work order 28 (Claude → Codex): Aspirova technical overview PDF
+
+- Owner supplied a 17-page field guide for Aspirova and asked for a view/download option on the
+  project. Read the whole PDF before committing it — no credentials, no connection strings, no
+  third-party personal data. Public hostnames only.
+- Spec deliberately forbade a second modal. The resume viewer already had a focus trap, focus
+  restore, backdrop close and a scroll lock, all fixed and verified in the accessibility audit;
+  a copy would have been a third implementation to keep in sync. Codex extracted it into
+  `PdfViewerButton` and reduced `ViewResumeButton` to a wrapper, preserving its two call sites
+  and its audited accessible names byte for byte.
+- Claude's spec error: it typed the `icon` prop as `React.ComponentType`. That builds on the
+  home page and fails at prerender on the project detail page, which is a server component.
+  Fixed by passing the element instead. Recorded in AGENTS.md so it is not reintroduced.
+- Codex output also carried a stray `export default` (this codebase is named exports) and a
+  props-spread to conditionally set `aria-label`, where React already drops `undefined`
+  attributes. Both simplified.
+- Verified against a production build, not dev: lint silent, build exit 0, all four project
+  pages still SSG and `/` still 1h. PDF served `application/pdf`, 46,054 bytes, byte count
+  matching source. Exactly one control on the home page and one on `/projects/aspirova`; the
+  other three projects unchanged. Dialog has `role="dialog"`, `aria-modal`, a `useId` heading
+  id, scroll lock, and Escape restores focus to the trigger. At 375px the row wraps with 24px
+  gaps in both axes, so the 20px targets keep the same 2.5.8 spacing exception as their
+  siblings.
+
