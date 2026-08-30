@@ -193,7 +193,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 iframeTitle={`${project.title} ${project.docsLabel}`}
                 closeLabel={`Close ${project.title} ${project.docsLabel.toLowerCase()} viewer`}
                 icon={<FileText className="mr-2 h-4 w-4" />}
-                className="inline-flex items-center rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 text-sm font-display font-medium text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex items-center sm:ml-auto rounded-md border border-primary/25 bg-primary/10 px-3 py-1.5 text-sm font-display font-medium text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
             )}
           </div>
