@@ -141,5 +141,14 @@ export const portfolioData = {
       showViewButton: true,
       showDownloadButton: true,
     },
+    {
+      title: "Adobe University Hackathon",
+      issuer: "Adobe",
+      programType: "Certificate of Participation",
+      status: "Completed",
+      certificateFile: "/certificates/adobe-university-hackathon-certificate.pdf",
+      showViewButton: true,
+      showDownloadButton: true,
+    },
   ]
 };

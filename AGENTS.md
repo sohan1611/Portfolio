@@ -248,6 +248,25 @@ driving a production build, not by reading alone.
 - [x] **The 404 inherited the portfolio's title.** Now "Page Not Found | Sohan Mandal" with
       its own description, still returning HTTP 404.
 
+### Open — awaiting the owner's decision
+
+Neither is a defect. Both need a call only the owner can make, so do not "fix" either one
+unprompted.
+
+- [ ] **The published Aspirova PDF is stamped `FIELD GUIDE / INTERNAL` on its cover.**
+      `public/docs/aspirova-technical-overview.pdf` is linked publicly from the Aspirova card and
+      `/projects/aspirova`, and the first line a visitor reads is a label saying it is internal.
+      The content itself was reviewed and is fine to publish — no credentials, no connection
+      strings, no third-party personal data. Fixing this needs a regenerated PDF from the owner,
+      not a code change: drop the new file in and overwrite the same path, and nothing else moves.
+
+- [ ] **`--color-ring` is undefined, so the focus-ring colour is inherited by accident.**
+      See the note in *Settled decisions* for the measurement detail. `focus-visible:ring-ring`
+      generates nothing in all 38 places it is used, and the rings only appear because Tailwind
+      v4's `ring-1` falls back to `currentcolor`. They are visible and pass contrast, so this is
+      not broken. Defining `--color-ring` in the `@theme` block would make the colour deliberate
+      — but it changes the focus appearance on 38 elements at once, which is a design decision.
+
 ### Design conventions
 
 - **Section headings go through `src/components/ui/SectionHeading.tsx`.** Do not hand-write
