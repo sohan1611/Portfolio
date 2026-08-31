@@ -253,12 +253,19 @@ driving a production build, not by reading alone.
 Neither is a defect. Both need a call only the owner can make, so do not "fix" either one
 unprompted.
 
-- [ ] **The published Aspirova PDF is stamped `FIELD GUIDE / INTERNAL` on its cover.**
-      `public/docs/aspirova-technical-overview.pdf` is linked publicly from the Aspirova card and
-      `/projects/aspirova`, and the first line a visitor reads is a label saying it is internal.
-      The content itself was reviewed and is fine to publish — no credentials, no connection
-      strings, no third-party personal data. Fixing this needs a regenerated PDF from the owner,
-      not a code change: drop the new file in and overwrite the same path, and nothing else moves.
+- [x] **The published Aspirova PDF's `FIELD GUIDE / INTERNAL` label — closed by the owner
+      2026-09-01, deliberately.** The doc was revised for public release and the new revision is
+      live at `public/docs/aspirova-technical-overview.pdf`. The revision removed the registered
+      user count from all three places it appeared, dropped the named aggregators from the
+      scraping discussion, added the crawler-ethics paragraph (robots policy per source, declared
+      user agent with a contact route, paced requests, `Retry-After` honoured), and softened
+      "legally clean" to "first-party and structurally stable".
+
+      **The label itself went from 1 occurrence to 17** — the regeneration moved it into the
+      running page header, so it now appears on the cover and on every page, where before it was
+      cover-only. This was measured and raised before publishing; the owner reviewed it and chose
+      to ship anyway. Do not "fix" this by editing the PDF — it is owner-authored content, and the
+      decision is recorded. If a future revision drops the header, overwrite the same path.
 
 - [ ] **`--color-ring` is undefined, so the focus-ring colour is inherited by accident.**
       See the note in *Settled decisions* for the measurement detail. `focus-visible:ring-ring`
