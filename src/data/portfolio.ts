@@ -69,6 +69,27 @@ export const portfolioData = {
       status: "Live"
     },
     {
+      title: "CogniFlow",
+      slug: "cogniflow",
+      team: "BloodCoded",
+      problemStatement: "When a student fails the same exercise twice, most AI tutors hand them an easier version of it — but the real gap is often a missing prerequisite, so they fail again for the same invisible reason.",
+      solution: "Built an agentic tutor that traces repeated failure to its cause: it walks a prerequisite graph using live Bayesian mastery estimates, reassigns its own objective to the weakest unmastered skill, teaches it, then returns to the original goal.",
+      keyFeatures: [
+        "Prerequisite-aware redirects over a skill dependency graph",
+        "Bayesian Knowledge Tracing for live mastery estimates",
+        "LLM decisions validated by a deterministic policy guard",
+        "Infrastructure faults can never move a student's mastery",
+        "19% fewer attempts to mastery across 80 simulated students"
+      ],
+      technologies: ["Agentic AI", "Knowledge Tracing", "Adaptive Learning"],
+      githubUrl: "https://github.com/sohan1611/BloodCoded_Agentic",
+      liveUrl: "https://cogniflow-nine.vercel.app/",
+      additionalLinks: [
+        { label: "Streamlit Demo", url: "https://cogni-flow.streamlit.app/" }
+      ],
+      status: "Live"
+    },
+    {
       title: "Apex Intel",
       slug: "apex-intel",
       problemStatement: "Startup due diligence requires extensive research across markets, competitors, risks, and business viability, making investment analysis time-consuming and fragmented.",

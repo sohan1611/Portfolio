@@ -285,3 +285,25 @@ does not match `:focus-visible`, and `transition-all` elements read as all-trans
 `box-shadow` in a driven browser. Disabling the transition showed the real value,
 `rgb(194, 198, 214) 0 0 0 1px`. Both traps are now written up in AGENTS.md.
 
+## 2026-09-18 — Work order 30 (Claude → Codex): CogniFlow, the first team project
+
+- Owner asked for CogniFlow as a collaborative project by Team BloodCoded, with a deployed app,
+  a Streamlit demo and a GitHub link. Claude sourced every line of card copy from the project's
+  own README (local checkout at D:\Downloads\BloodCoded) and repo description rather than
+  inventing it; the spec quoted it verbatim. The measured claim ("19% fewer attempts to mastery
+  across 80 simulated students") is the README's ablation result and keeps "simulated".
+- Checked all three links in a real browser before speccing. GitHub is public. The Vercel app
+  lands on a sign-in page (email, Google, create account); the Streamlit app is public and opens
+  straight into the demo — curl's /-/login bounce there was only Streamlit Cloud's cookie
+  handshake, not a login wall.
+- Two data-model additions, both sparse (CogniFlow only): `team` and
+  `additionalLinks: { label, url }[]`, labels kept in data per section 3.
+- Structured data had to change, not just the card: every project page named the owner as sole
+  `author`, which would be false for a team project. Team projects now emit the team as an
+  `Organization` author with the owner as `contributor` (same Person @id, still merges with the
+  layout graph). Verified the four solo projects are byte-for-byte unchanged in that respect.
+- Codex split two long strings onto their own lines unlike every neighbouring project; Claude
+  normalised them. Verified on a production build: six sitemap URLs, /projects/cogniflow and
+  its OG image prerendered, the other four cards unchanged (12px title margin, same footers),
+  palette search for "BloodCoded" returns CogniFlow, no overflow at 375px.
+

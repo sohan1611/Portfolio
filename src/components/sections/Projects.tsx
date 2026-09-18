@@ -6,7 +6,7 @@ import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
 import { SectionHeading } from "../ui/SectionHeading";
 import { PdfViewerButton } from "../ui/PdfViewerButton";
-import { ArrowRight, ExternalLink, FileText } from "lucide-react";
+import { ArrowRight, ExternalLink, FileText, Users } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 export function Projects() {
@@ -26,7 +26,11 @@ export function Projects() {
                 <div className="p-6 md:p-8 flex-grow space-y-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div>
-                      <h3 className="text-2xl font-display font-bold text-foreground mb-3">
+                      <h3
+                        className={`text-2xl font-display font-bold text-foreground ${
+                          project.team ? "mb-1" : "mb-3"
+                        }`}
+                      >
                         <Link
                           href={`/projects/${project.slug}`}
                           className="rounded text-inherit transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
@@ -34,6 +38,12 @@ export function Projects() {
                           {project.title}
                         </Link>
                       </h3>
+                      {project.team && (
+                        <p className="mb-3 flex items-center gap-1.5 text-xs font-display text-muted-foreground">
+                          <Users className="h-3.5 w-3.5" aria-hidden="true" />
+                          Team project · {project.team}
+                        </p>
+                      )}
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
                           <span
@@ -116,6 +126,19 @@ export function Projects() {
                       Live Demo
                     </a>
                   )}
+                  {project.additionalLinks?.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${link.label} for ${project.title}`}
+                      className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                    >
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      {link.label}
+                    </a>
+                  ))}
                   {project.docsUrl && project.docsLabel && (
                     <PdfViewerButton
                       fileUrl={project.docsUrl}

@@ -52,7 +52,7 @@ const COMMAND_ENTRIES: CommandEntry[] = [
     name: project.title,
     href: `/projects/${project.slug}`,
     group: "Projects" as const,
-    keywords: [...project.technologies, project.status],
+    keywords: [...project.technologies, project.status, ...(project.team ? [project.team] : [])],
   })),
   ...UNIQUE_SKILLS.map((skill) => ({
     name: skill,

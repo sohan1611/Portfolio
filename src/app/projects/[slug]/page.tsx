@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, FileText, Users } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 import { portfolioData } from "@/data/portfolio";
@@ -85,11 +85,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     description: project.solution,
     url: canonicalUrl,
     codeRepository: project.githubUrl,
-    author: {
-      "@type": "Person",
-      "@id": `${portfolioData.personal.siteUrl}/#person`,
-      name: portfolioData.personal.name,
-    },
+    ...(project.team
+      ? {
+          author: { "@type": "Organization", name: project.team },
+          contributor: {
+            "@type": "Person",
+            "@id": `${portfolioData.personal.siteUrl}/#person`,
+            name: portfolioData.personal.name,
+          },
+        }
+      : {
+          author: {
+            "@type": "Person",
+            "@id": `${portfolioData.personal.siteUrl}/#person`,
+            name: portfolioData.personal.name,
+          },
+        }),
     ...(project.liveUrl
       ? {
           targetProduct: {
@@ -122,9 +133,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Reveal delay={80}>
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="space-y-5">
-              <h1 className="text-4xl font-display font-bold tracking-tight text-foreground md:text-5xl">
-                {project.title}
-              </h1>
+              <div className="space-y-2">
+                <h1 className="text-4xl font-display font-bold tracking-tight text-foreground md:text-5xl">
+                  {project.title}
+                </h1>
+                {project.team && (
+                  <p className="flex items-center gap-1.5 text-xs font-display text-muted-foreground">
+                    <Users className="h-3.5 w-3.5" aria-hidden="true" />
+                    Team project · {project.team}
+                  </p>
+                )}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
@@ -214,6 +233,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 Live Demo
               </a>
             )}
+            {project.additionalLinks?.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.label} for ${project.title}`}
+                className="flex items-center rounded text-sm font-display font-medium text-muted-foreground hover:text-accent transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <ExternalLink className="mr-2 h-4 w-4" />
+                {link.label}
+              </a>
+            ))}
             {project.docsUrl && project.docsLabel && (
               <PdfViewerButton
                 fileUrl={project.docsUrl}
